@@ -1,59 +1,66 @@
 <!DOCTYPE html>
-<html lang="de" data-mode="dark">
+<html lang="de" data-mode="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FotolitoStudio</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   BAUHAUS DESIGN SYSTEM
-   Primary = Red / Gelb / Blau / Schwarz / Weiß
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════
+   BAUHAUS DESIGN SYSTEM — Semantic Color Roles
+   PRIMARY   → Blue   (Hauptaktion)
+   SECONDARY → Grau   (Nebenaktionen)
+   DANGER    → Rot    (Löschen / Fehler / Warnung)
+   SUCCESS   → Grün   (Fertig / Herunterladen)
+   ACCENT    → Gelb   (Highlight / Marke)
+════════════════════════════════════════════ */
 :root {
-  --bauhaus-red:   #D62828;
-  --bauhaus-blue:  #1B3FFF;
-  --bauhaus-yellow:#F7C948;
-  --bauhaus-black: #111111;
-  --bauhaus-white: #F4F1EA;
-  --bauhaus-gray:  #999999;
-  --bauhaus-lgray: #CCCCCC;
+  --bauhaus-red:    #D62828;
+  --bauhaus-blue:   #1B3FFF;
+  --bauhaus-yellow: #F7C948;
+  --bauhaus-green:  #16A34A;
+  --bauhaus-black:  #111111;
+  --bauhaus-white:  #F4F1EA;
 }
 
-/* LIGHT MODE */
 [data-mode="light"] {
-  --bg:       var(--bauhaus-white);
-  --surface:  #E8E5DE;
-  --surface2: #DEDAD2;
-  --border:   var(--bauhaus-black);
-  --text:     var(--bauhaus-black);
-  --text-muted: #555555;
-  --text-dim:   #888888;
-  --accent:   var(--bauhaus-red);
-  --accent2:  var(--bauhaus-blue);
-  --accent3:  var(--bauhaus-yellow);
-  --btn-text: var(--bauhaus-white);
+  --bg:        var(--bauhaus-white);
+  --surface:   #E8E5DE;
+  --surface2:  #DEDAD2;
+  --border:    #BBBBBB;
+  --border-strong: var(--bauhaus-black);
+  --text:      var(--bauhaus-black);
+  --text-muted:#666666;
+  --text-dim:  #999999;
+  --col-primary: var(--bauhaus-blue);
+  --col-danger:  var(--bauhaus-red);
+  --col-success: var(--bauhaus-green);
+  --col-warn:    #C17A00;
+  --col-secondary-bg: #D8D5CE;
+  --col-secondary-text: #444444;
 }
 
-/* DARK MODE (default) */
 [data-mode="dark"] {
-  --bg:       #111111;
-  --surface:  #1A1A1A;
-  --surface2: #222222;
-  --border:   #444444;
-  --text:     var(--bauhaus-white);
-  --text-muted: #AAAAAA;
-  --text-dim:   #666666;
-  --accent:   var(--bauhaus-red);
-  --accent2:  #4D6DFF;
-  --accent3:  var(--bauhaus-yellow);
-  --btn-text: var(--bauhaus-white);
+  --bg:        #111111;
+  --surface:   #1A1A1A;
+  --surface2:  #222222;
+  --border:    #383838;
+  --border-strong: #666666;
+  --text:      var(--bauhaus-white);
+  --text-muted:#AAAAAA;
+  --text-dim:  #666666;
+  --col-primary: #4D6DFF;
+  --col-danger:  #E05252;
+  --col-success: #22C55E;
+  --col-warn:    #F7C948;
+  --col-secondary-bg: #2A2A2A;
+  --col-secondary-text: #CCCCCC;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 13px; }
 body {
-  font-family: 'IBM Plex Mono', 'Space Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   background: var(--bg);
   color: var(--text);
   height: 100vh;
@@ -63,828 +70,680 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 
-/* ═══ HEADER ═══════════════════════════════ */
+/* ════ BAUHAUS STRIPE ════════════════════════ */
+.bauhaus-stripe { display:flex; height:4px; flex-shrink:0; }
+.bs-r { background:#D62828; flex:1; }
+.bs-y { background:#F7C948; flex:1; }
+.bs-b { background:#1B3FFF; flex:1; }
+.bs-k { background:#111111; flex:3; }
+
+/* ════ HEADER ════════════════════════════════ */
 header {
-  display: flex;
-  align-items: stretch;
-  height: 52px;
-  background: var(--surface);
-  border-bottom: 2px solid var(--border);
-  flex-shrink: 0;
+  display:flex; align-items:stretch; height:46px;
+  background:var(--surface); border-bottom:2px solid var(--border-strong);
+  flex-shrink:0;
 }
-.header-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 18px;
-  border-right: 2px solid var(--border);
+.header-title {
+  display:flex; align-items:center; padding:0 18px;
+  border-right:2px solid var(--border-strong); gap:10px;
 }
-.bauhaus-mark {
-  width: 32px;
-  height: 32px;
-  position: relative;
-  flex-shrink: 0;
+.header-title-text {
+  font-size:13px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--text);
 }
-.bauhaus-mark-circle {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: var(--bauhaus-red);
-  position: absolute;
-  top: 0; left: 0;
+.header-title-sub {
+  font-size:9px; font-weight:400; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text-muted);
 }
-.bauhaus-mark-rect {
-  width: 18px; height: 18px;
-  background: var(--accent2);
-  position: absolute;
-  bottom: 0; right: 0;
-}
-.logo-text {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1;
-  color: var(--text);
-}
-.logo-sub {
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-.header-badges {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border-right: 2px solid var(--border);
-}
-.hbadge {
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  border-right: 1px solid var(--border);
-  height: 100%;
-}
-.hbadge.red { color: var(--bauhaus-red); }
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  margin-left: auto;
-}
+.header-right { display:flex; align-items:center; margin-left:auto; }
 
-/* ═══ LANG SWITCHER ════════════════════════ */
-.lang-switcher {
-  display: flex;
-  align-items: stretch;
-  border-left: 2px solid var(--border);
-}
+/* ════ LANG SWITCHER ═════════════════════════ */
+.lang-switcher { display:flex; align-items:stretch; border-left:2px solid var(--border-strong); }
 .lang-btn {
-  background: transparent;
-  border: none;
-  border-right: 1px solid var(--border);
-  color: var(--text-muted);
-  padding: 0 14px;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 700;
-  font-family: 'IBM Plex Mono', monospace;
-  letter-spacing: 1px;
-  transition: all 0.1s;
-  height: 100%;
+  background:transparent; border:none; border-right:1px solid var(--border);
+  color:var(--text-muted); padding:0 13px; cursor:pointer;
+  font-size:11px; font-weight:700; font-family:inherit; letter-spacing:1px;
+  transition:all 0.12s; height:100%; border-radius:0;
 }
-.lang-btn:last-child { border-right: none; }
-.lang-btn:hover { background: var(--surface2); color: var(--text); }
-.lang-btn.active { background: var(--accent); color: #fff; }
+.lang-btn:last-child { border-right:none; }
+.lang-btn:hover { background:var(--surface2); color:var(--text); }
+.lang-btn.active { background:var(--col-primary); color:#fff; }
 
-/* ═══ DARK/LIGHT TOGGLE ════════════════════ */
+/* ════ THEME TOGGLE ══════════════════════════ */
 .theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 16px;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  border-left: 2px solid var(--border);
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 700;
-  font-family: 'IBM Plex Mono', monospace;
-  letter-spacing: 1px;
-  transition: all 0.1s;
-  gap: 8px;
-  height: 100%;
+  display:flex; align-items:center; justify-content:center; padding:0 15px;
+  cursor:pointer; border:none; background:transparent;
+  border-left:2px solid var(--border-strong);
+  color:var(--text-muted); font-size:11px; font-weight:700;
+  font-family:inherit; letter-spacing:1px; transition:all 0.12s; gap:7px; height:100%;
 }
-.theme-toggle:hover { background: var(--surface2); color: var(--text); }
-.theme-icon {
-  width: 18px; height: 18px;
-  position: relative;
-  flex-shrink: 0;
-}
-.theme-icon-inner {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  border: 2px solid currentColor;
-  position: absolute;
-  overflow: hidden;
-}
-.theme-icon-half {
-  position: absolute;
-  right: 0; top: 0;
-  width: 9px; height: 18px;
-  background: currentColor;
-}
+.theme-toggle:hover { background:var(--surface2); color:var(--text); }
+.theme-half { width:16px; height:16px; border-radius:50%; border:2px solid currentColor; overflow:hidden; position:relative; flex-shrink:0; }
+.theme-half-fill { position:absolute; right:0; top:0; width:8px; height:16px; background:currentColor; }
 
-/* ═══ APP LAYOUT ════════════════════════════ */
-.app { display: flex; flex: 1; overflow: hidden; }
+/* ════ APP LAYOUT ════════════════════════════ */
+.app { display:flex; flex:1; overflow:hidden; }
 
-/* ═══ SIDEBAR ═══════════════════════════════ */
+/* ════ SIDEBAR ═══════════════════════════════ */
 .sidebar {
-  width: 292px;
-  flex-shrink: 0;
-  background: var(--surface);
-  border-right: 2px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
+  width:292px; flex-shrink:0; background:var(--surface);
+  border-right:2px solid var(--border-strong);
+  display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden;
 }
-.sidebar::-webkit-scrollbar { width: 3px; }
-.sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
 
-/* ═══ STEPS ═════════════════════════════════ */
-.step { border-bottom: 2px solid var(--border); }
-.step-header {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  height: 44px;
-  overflow: hidden;
-}
+/* ════ STEPS ═════════════════════════════════ */
+.step { border-bottom:2px solid var(--border); }
+.step-header { display:flex; align-items:center; height:44px; }
 .step-num {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 700;
-  background: var(--surface2);
-  border-right: 2px solid var(--border);
-  flex-shrink: 0;
-  color: var(--text-muted);
-  transition: all 0.2s;
+  width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:700; background:var(--surface2);
+  border-right:2px solid var(--border); flex-shrink:0; color:var(--text-dim);
+  transition:all 0.2s;
 }
-.step.active .step-num { background: var(--accent); color: #fff; border-color: var(--accent); }
-.step-title {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  padding: 0 14px;
-  transition: color 0.2s;
-}
-.step.active .step-title { color: var(--text); }
-.step-body { padding: 14px; }
+.step.active .step-num { background:var(--col-primary); color:#fff; border-color:var(--col-primary); }
+.step-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); padding:0 14px; }
+.step.active .step-title { color:var(--text); }
+.step-body { padding:14px; }
 
-/* ═══ UPLOAD ZONE ═══════════════════════════ */
+/* ════ UPLOAD ZONE ═══════════════════════════ */
 .upload-zone {
-  border: 2px dashed var(--border);
-  padding: 24px 14px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-  overflow: hidden;
-  background: var(--surface2);
+  border:2px dashed var(--border); padding:24px 14px; text-align:center;
+  cursor:pointer; transition:all 0.15s; position:relative; overflow:hidden;
+  background:var(--surface2); border-radius:8px;
 }
 .upload-zone:hover, .upload-zone.drag-over {
-  border-color: var(--accent);
-  border-style: solid;
-  background: var(--bg);
+  border-color:var(--col-primary); border-style:solid; background:var(--bg);
 }
-[data-mode="light"] .upload-zone:hover,
-[data-mode="light"] .upload-zone.drag-over {
-  background: #fff;
-}
-.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-.upload-icon {
-  width: 36px; height: 36px;
-  margin: 0 auto 10px;
-  border: 2px solid var(--text-muted);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.upload-text { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: 0.5px; }
-.upload-sub { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; line-height: 1.6; }
+.upload-zone input { position:absolute; inset:0; opacity:0; cursor:pointer; }
+.upload-icon { width:36px; height:36px; margin:0 auto 10px; border:2px solid var(--text-muted); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.upload-text { font-size:12px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.upload-sub { font-size:10px; color:var(--text-muted); letter-spacing:0.5px; line-height:1.7; }
 
-/* ═══ CONTROLS ══════════════════════════════ */
-.ctrl-group { margin-bottom: 12px; }
-.ctrl-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-muted);
+/* ════ IMAGE ACTIONS BAR ═════════════════════ */
+.img-actions {
+  display:none; gap:6px; margin-top:10px;
 }
-.ctrl-val {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  padding: 1px 5px;
-  min-width: 38px;
-  text-align: center;
-}
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 2px;
-  background: var(--border);
-  outline: none;
-  cursor: pointer;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 12px; height: 12px;
-  background: var(--accent);
-  cursor: pointer;
-  border: 2px solid var(--border);
-}
+.img-actions.visible { display:flex; }
+
+/* ════ CONTROLS ══════════════════════════════ */
+.ctrl-group { margin-bottom:12px; }
+.ctrl-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); }
+.ctrl-val { font-size:11px; font-weight:700; color:var(--text); background:var(--surface2); border:1px solid var(--border); padding:1px 5px; min-width:38px; text-align:center; border-radius:4px; }
+input[type=range] { -webkit-appearance:none; width:100%; height:2px; background:var(--border); outline:none; cursor:pointer; border-radius:2px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; background:var(--col-primary); cursor:pointer; border-radius:50%; border:2px solid var(--bg); box-shadow:0 0 0 1px var(--col-primary); }
 select, input[type=number] {
-  width: 100%;
-  background: var(--surface2);
-  border: 2px solid var(--border);
-  padding: 6px 8px;
-  color: var(--text);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 600;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 0;
+  width:100%; background:var(--surface2); border:1.5px solid var(--border);
+  padding:7px 9px; color:var(--text); font-family:inherit; font-size:11px;
+  font-weight:600; outline:none; cursor:pointer; appearance:none;
+  border-radius:7px; transition:border-color 0.15s;
 }
-select:focus, input[type=number]:focus { border-color: var(--accent); }
-.select-wrap { position: relative; }
-.select-wrap::after {
-  content: '▾';
-  position: absolute;
-  right: 8px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-  pointer-events: none;
-  font-size: 10px;
-}
+select:focus, input[type=number]:focus { border-color:var(--col-primary); }
+.select-wrap { position:relative; }
+.select-wrap::after { content:'▾'; position:absolute; right:9px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; font-size:10px; }
 
-/* ═══ BUTTONS ═══════════════════════════════ */
+/* ════ BUTTONS — Semantic Roles ═════════════
+  Primary  → Blau   — Hauptaktion
+  Secondary→ Grau   — Nebenaktionen
+  Danger   → Rot    — Löschen / Fehler
+  Success  → Grün   — Bestätigen / Herunterladen
+════════════════════════════════════════════ */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 9px 14px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  border: 2px solid var(--border);
-  border-radius: 0;
-  transition: all 0.1s;
-  width: 100%;
-  text-transform: uppercase;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:6px; padding:9px 14px; font-family:inherit; font-size:11px;
+  font-weight:700; letter-spacing:0.5px; cursor:pointer;
+  border-radius:8px; border:1.5px solid transparent;
+  transition:all 0.12s; width:100%; text-transform:uppercase;
 }
-.btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn-primary:not(:disabled):hover { background: #AA1E1E; border-color: #AA1E1E; }
-.btn-secondary { background: var(--surface2); color: var(--text); }
-.btn-secondary:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
-.btn-blue { background: var(--accent2); color: #fff; border-color: var(--accent2); }
-.btn-blue:not(:disabled):hover { opacity: 0.85; }
+.btn:disabled { opacity:0.35; cursor:not-allowed; }
+.btn:not(:disabled):active { transform:scale(0.97); }
 
-/* ═══ NOTE ══════════════════════════════════ */
-.note {
-  border-left: 3px solid var(--accent);
-  padding: 7px 9px;
-  font-size: 10px;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-  line-height: 1.6;
-  background: var(--surface2);
+/* Primary: Blue — hauptaktion (Konvertieren, Exportieren) */
+.btn-primary {
+  background:var(--col-primary); color:#fff;
+  border-color:var(--col-primary);
 }
-.note strong { color: var(--text); }
+.btn-primary:not(:disabled):hover { opacity:0.88; }
 
-/* ═══ MESH CALC ═════════════════════════════ */
-.mesh-calc {
-  border: 2px solid var(--border);
-  padding: 10px;
-  margin-top: 10px;
-  background: var(--surface2);
+/* Secondary: Grau — Nebenaktionen (Zurücksetzen, Vorschau) */
+.btn-secondary {
+  background:var(--col-secondary-bg); color:var(--col-secondary-text);
+  border-color:var(--border);
 }
-.mesh-calc-title {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-.mesh-row { display: flex; gap: 6px; align-items: center; }
-.mesh-input { flex: 1; }
-.mesh-result {
-  font-size: 13px; font-weight: 700;
-  color: var(--accent);
-  min-width: 58px; text-align: right;
-}
-.mesh-presets { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 8px; }
-.mesh-preset {
-  font-size: 9px; padding: 2px 6px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.1s;
-  color: var(--text-muted);
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 700;
-}
-.mesh-preset:hover { border-color: var(--accent); color: var(--accent); }
+.btn-secondary:not(:disabled):hover { border-color:var(--col-primary); color:var(--col-primary); }
 
-/* ═══ MAIN AREA ═════════════════════════════ */
-.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+/* Danger: Rot — ONLY für destructive/Löschen */
+.btn-danger {
+  background:transparent; color:var(--col-danger);
+  border-color:var(--col-danger);
+}
+.btn-danger:not(:disabled):hover { background:var(--col-danger); color:#fff; }
+
+/* Success: Grün — Erfolg / Herunterladen */
+.btn-success {
+  background:var(--col-success); color:#fff;
+  border-color:var(--col-success);
+}
+.btn-success:not(:disabled):hover { opacity:0.88; }
+
+/* Ghost: kein Hintergrund */
+.btn-ghost { background:transparent; color:var(--text-muted); border-color:var(--border); }
+.btn-ghost:not(:disabled):hover { color:var(--text); border-color:var(--border-strong); }
+
+/* Small variant */
+.btn-sm { padding:6px 11px; font-size:10px; border-radius:6px; }
+
+/* ════ NOTE ══════════════════════════════════ */
+.note { border-left:3px solid var(--col-primary); padding:7px 9px; font-size:10px; color:var(--text-muted); margin-bottom:10px; line-height:1.6; background:var(--surface2); border-radius:0 6px 6px 0; }
+.note strong { color:var(--text); }
+
+/* ════ MESH CALC ═════════════════════════════ */
+.mesh-calc { border:1.5px solid var(--border); padding:10px; margin-top:10px; background:var(--surface2); border-radius:8px; }
+.mesh-calc-title { font-size:9px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); margin-bottom:8px; font-weight:700; }
+.mesh-row { display:flex; gap:6px; align-items:center; }
+.mesh-input { flex:1; }
+.mesh-result { font-size:13px; font-weight:700; color:var(--col-primary); min-width:58px; text-align:right; }
+.mesh-presets { display:flex; gap:3px; flex-wrap:wrap; margin-top:8px; }
+.mesh-preset { font-size:9px; padding:3px 7px; background:var(--surface); border:1px solid var(--border); cursor:pointer; transition:all 0.12s; color:var(--text-muted); font-family:inherit; font-weight:700; border-radius:5px; }
+.mesh-preset:hover { border-color:var(--col-primary); color:var(--col-primary); }
+
+/* ════ SHAPE GRID ════════════════════════════ */
+.shape-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; }
+.shape-btn { aspect-ratio:1; border:1.5px solid var(--border); border-radius:7px; background:var(--surface2); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:15px; transition:all 0.12s; }
+.shape-btn:hover { border-color:var(--col-primary); }
+.shape-btn.active { border-color:var(--col-primary); background:var(--col-primary); color:#fff; }
+
+/* ════ MAIN / PREVIEW ════════════════════════ */
+.main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
 .toolbar {
-  display: flex;
-  align-items: stretch;
-  border-bottom: 2px solid var(--border);
-  background: var(--surface);
-  flex-shrink: 0;
-  height: 40px;
+  display:flex; align-items:stretch; border-bottom:2px solid var(--border-strong);
+  background:var(--surface); flex-shrink:0; height:40px;
 }
-.zoom-btns { display: flex; align-items: stretch; }
+.zoom-btns { display:flex; align-items:stretch; }
 .zoom-btn {
-  background: transparent;
-  border: none;
-  border-right: 1px solid var(--border);
-  color: var(--text-muted);
-  padding: 0 11px;
-  cursor: pointer;
-  font-size: 10px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  transition: all 0.1s;
+  background:transparent; border:none; border-right:1px solid var(--border);
+  color:var(--text-muted); padding:0 11px; cursor:pointer; font-size:10px;
+  font-family:inherit; font-weight:700; letter-spacing:0.5px; transition:all 0.12s;
+  border-radius:0;
 }
-.zoom-btn:hover, .zoom-btn.active { background: var(--accent); color: #fff; }
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  margin-left: auto;
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-}
+.zoom-btn:hover, .zoom-btn.active { background:var(--col-primary); color:#fff; }
+.toolbar-right { display:flex; align-items:center; padding:0 14px; margin-left:auto; font-size:10px; color:var(--text-muted); gap:10px; }
 
 .preview-area {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  background: var(--border);
-  overflow: hidden;
+  flex:1; display:grid; grid-template-columns:1fr 1fr;
+  background:var(--border-strong); overflow:hidden;
 }
-.preview-pane { background: var(--bg); display: flex; flex-direction: column; overflow: hidden; }
+.preview-pane { background:var(--bg); display:flex; flex-direction:column; overflow:hidden; }
 .preview-label {
-  padding: 5px 12px;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-  font-weight: 700;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  padding:5px 12px; font-size:9px; text-transform:uppercase; letter-spacing:1.5px;
+  color:var(--text-dim); font-weight:700; background:var(--surface);
+  border-bottom:1px solid var(--border); flex-shrink:0;
+  display:flex; align-items:center; gap:8px;
 }
-.pv-dot { width: 8px; height: 8px; }
-.pv-dot-orig { background: var(--text-muted); }
-.pv-dot-result { background: var(--accent); }
+.pv-dot { width:8px; height:8px; border-radius:2px; }
+.pv-orig { background:var(--text-muted); }
+.pv-result { background:var(--col-primary); }
 .canvas-wrap {
-  flex: 1; overflow: auto;
-  display: flex; align-items: center; justify-content: center;
-  background: repeating-conic-gradient(#181818 0% 25%, #121212 0% 50%) 0 0 / 16px 16px;
+  flex:1; overflow:auto; display:flex; align-items:center; justify-content:center;
+  /* Photoshop-style transparency checker — fixed, mode-independent */
+  background-color: #808080;
+  background-image:
+    linear-gradient(45deg, #999 25%, transparent 25%),
+    linear-gradient(-45deg, #999 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #999 75%),
+    linear-gradient(-45deg, transparent 75%, #999 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  position:relative;
 }
-[data-mode="light"] .canvas-wrap {
-  background: repeating-conic-gradient(#DDD 0% 25%, #CCC 0% 50%) 0 0 / 16px 16px;
+canvas { max-width:100%; max-height:100%; image-rendering:pixelated; outline:1px solid var(--border); }
+
+.empty-state { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:var(--text-dim); width:100%; height:100%; text-align:center; padding:20px; }
+.empty-icon { font-size:32px; opacity:0.22; font-weight:700; }
+.empty-text { font-size:11px; line-height:1.8; letter-spacing:0.5px; }
+
+/* double-click hint overlay */
+.dbl-hint {
+  position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+  background:rgba(0,0,0,0.65); color:#fff; font-size:10px; padding:4px 10px;
+  border-radius:20px; pointer-events:none; opacity:0; transition:opacity 0.3s;
+  white-space:nowrap; letter-spacing:0.5px; font-weight:600;
 }
-canvas { max-width: 100%; max-height: 100%; image-rendering: pixelated; outline: 1px solid var(--border); }
+.canvas-wrap:hover .dbl-hint { opacity:1; }
+[data-mode="light"] .dbl-hint { background:rgba(0,0,0,0.55); }
 
-.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--text-dim); width: 100%; height: 100%; text-align: center; padding: 20px; }
-.empty-icon { font-size: 32px; opacity: 0.25; font-weight: 700; line-height: 1; }
-.empty-text { font-size: 11px; line-height: 1.8; letter-spacing: 0.5px; }
+/* ════ PROGRESS ══════════════════════════════ */
+.progress-bar { height:2px; background:var(--surface2); overflow:hidden; margin-bottom:12px; border-radius:1px; }
+.progress-fill { height:100%; background:var(--col-primary); transition:width 0.2s; width:0%; border-radius:1px; }
 
-.progress-bar { height: 2px; background: var(--surface2); overflow: hidden; margin-bottom: 12px; }
-.progress-fill { height: 100%; background: var(--accent); transition: width 0.2s; width: 0%; }
+/* ════ EXPORT PANEL ══════════════════════════ */
+.export-panel { padding:14px; border-top:2px solid var(--border); }
+.export-panel .btn { margin-bottom:6px; }
+.lpi-explain { font-size:10px; color:var(--text-muted); margin-top:5px; letter-spacing:0.3px; line-height:1.6; }
 
-/* ═══ STATUS BAR ════════════════════════════ */
+/* ════ STATUS BAR ════════════════════════════ */
 .statusbar {
-  display: flex;
-  align-items: stretch;
-  background: var(--surface);
-  border-top: 2px solid var(--border);
-  flex-shrink: 0;
-  height: 32px;
+  display:flex; align-items:stretch; background:var(--surface);
+  border-top:2px solid var(--border-strong); flex-shrink:0; height:32px;
 }
-.status-left {
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  gap: 10px;
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-  border-right: 1px solid var(--border);
-}
-.status-dot { width: 7px; height: 7px; flex-shrink: 0; }
-.status-dot.ok { background: #22C55E; }
-.status-dot.processing { background: var(--accent3); animation: pulse 0.8s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.status-left { display:flex; align-items:center; padding:0 12px; gap:8px; font-size:10px; color:var(--text-muted); letter-spacing:0.5px; border-right:1px solid var(--border); }
+.status-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--text-dim); }
+.status-dot.ok { background:var(--col-success); }
+.status-dot.processing { background:var(--col-warn); animation:pulse 0.8s infinite; }
+.status-dot.fail { background:var(--col-danger); }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+.status-mid { display:flex; align-items:center; padding:0 12px; font-size:10px; color:var(--text-dim); letter-spacing:0.5px; }
+.status-credits { display:flex; align-items:center; padding:0 14px; gap:10px; font-size:9px; color:var(--text-dim); margin-left:auto; border-left:1px solid var(--border); }
+.credit-link { color:var(--text-muted); text-decoration:none; transition:color 0.15s; display:flex; align-items:center; gap:3px; }
+.credit-link:hover { color:var(--col-primary); }
 
-.status-mid { display: flex; align-items: center; padding: 0 12px; font-size: 10px; color: var(--text-dim); letter-spacing: 0.5px; }
+/* ════ ERROR ═════════════════════════════════ */
+.error-msg { border:1.5px solid var(--col-danger); border-radius:7px; padding:7px 9px; font-size:10px; color:var(--col-danger); margin-top:8px; display:none; letter-spacing:0.5px; background:transparent; }
+.error-msg.show { display:block; }
 
-/* ═══ CREDITS ═══════════════════════════════ */
-.status-credits {
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  gap: 10px;
-  font-size: 9px;
-  color: var(--text-dim);
-  letter-spacing: 0.5px;
-  margin-left: auto;
-  border-left: 1px solid var(--border);
+/* ════════════════════════════════════════════
+   MODAL — Crop/Position editor
+════════════════════════════════════════════ */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.75);
+  display:none; align-items:center; justify-content:center; z-index:100;
+  backdrop-filter:blur(2px);
 }
-.credit-link {
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--surface); border:2px solid var(--border-strong);
+  border-radius:14px; width:min(760px,96vw); max-height:92vh;
+  display:flex; flex-direction:column; overflow:hidden;
 }
-.credit-link:hover { color: var(--accent); }
-.credit-arrow {
-  font-size: 12px;
-  font-weight: 700;
+.modal-header {
+  display:flex; align-items:center; padding:12px 16px;
+  border-bottom:1px solid var(--border); gap:10px;
+}
+.modal-title { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; flex:1; }
+.modal-close { background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:18px; padding:2px 6px; border-radius:6px; transition:all 0.12s; }
+.modal-close:hover { background:var(--col-danger); color:#fff; }
+.modal-body { padding:16px; flex:1; overflow:auto; }
+
+/* crop stage = A4 silhouette */
+.crop-stage-wrap { display:flex; gap:16px; flex-wrap:wrap; }
+.crop-canvas-col { flex:1; min-width:260px; }
+.crop-controls-col { width:200px; flex-shrink:0; display:flex; flex-direction:column; gap:12px; }
+
+.a4-frame {
+  position:relative; overflow:hidden;
+  background-color: #808080;
+  background-image:
+    linear-gradient(45deg, #999 25%, transparent 25%),
+    linear-gradient(-45deg, #999 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #999 75%),
+    linear-gradient(-45deg, transparent 75%, #999 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
+  border:2px solid var(--col-primary); border-radius:4px;
+  width:100%; aspect-ratio:210/297;
+  cursor:grab; user-select:none;
+}
+.a4-frame.grabbing { cursor:grabbing; }
+.a4-img {
+  position:absolute; transform-origin:top left;
+  pointer-events:none; image-rendering:auto;
+}
+.a4-corner-label {
+  position:absolute; top:6px; left:8px;
+  font-size:9px; font-weight:700; letter-spacing:1.5px;
+  color:var(--col-primary); text-transform:uppercase; opacity:0.8;
 }
 
-.error-msg { background: #D6282811; border: 2px solid var(--bauhaus-red); padding: 7px 9px; font-size: 10px; color: var(--bauhaus-red); margin-top: 8px; display: none; letter-spacing: 0.5px; }
-.error-msg.show { display: block; }
+/* crop control rows */
+.crop-ctrl { margin-bottom:2px; }
+.crop-ctrl-label { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); font-weight:700; margin-bottom:4px; }
+.crop-ctrl input[type=range] { width:100%; }
+.crop-btn-row { display:flex; gap:6px; flex-wrap:wrap; }
+.crop-btn-row .btn { flex:1; min-width:0; }
 
-/* ═══ SHAPE GRID ════════════════════════════ */
-.shape-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
-.shape-btn {
-  aspect-ratio: 1;
-  border: 2px solid var(--border);
-  background: var(--surface2);
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  transition: all 0.1s;
+/* ════════════════════════════════════════════
+   MODAL — Preview (full A4 fotolito)
+════════════════════════════════════════════ */
+.preview-modal .modal { width:min(640px,96vw); }
+.preview-canvas-wrap {
+  display:flex; align-items:center; justify-content:center;
+  background-color: #808080;
+  background-image:
+    linear-gradient(45deg, #999 25%, transparent 25%),
+    linear-gradient(-45deg, #999 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #999 75%),
+    linear-gradient(-45deg, transparent 75%, #999 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  border-radius:8px; overflow:hidden; min-height:300px;
 }
-.shape-btn:hover { border-color: var(--text-muted); }
-.shape-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
-
-.export-panel { padding: 14px; border-top: 2px solid var(--border); }
-.export-panel .btn { margin-bottom: 6px; }
-.lpi-explain { font-size: 10px; color: var(--text-muted); margin-top: 5px; letter-spacing: 0.3px; line-height: 1.6; }
-
-/* ═══ BAUHAUS ACCENT STRIPE ═════════════════ */
-.bauhaus-stripe {
-  display: flex;
-  height: 4px;
-  flex-shrink: 0;
-}
-.bauhaus-stripe span { flex: 1; }
-.bs-r { background: var(--bauhaus-red); }
-.bs-y { background: var(--bauhaus-yellow); }
-.bs-b { background: var(--bauhaus-blue); }
-.bs-k { background: var(--bauhaus-black); flex: 3; }
-[data-mode="dark"] .bs-k { background: #F4F1EA; }
-
-/* ═══ SECTION DIVIDER ═══════════════════════ */
-.sec-div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0 10px;
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-}
-.sec-div::before, .sec-div::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+#previewFinalCanvas { max-width:100%; max-height:500px; border:1px solid var(--border); }
+.preview-note { font-size:10px; color:var(--text-muted); margin-top:10px; text-align:center; line-height:1.6; }
 </style>
 </head>
 <body>
 
-<!-- BAUHAUS STRIPE -->
-<div class="bauhaus-stripe">
-  <span class="bs-r"></span>
-  <span class="bs-y"></span>
-  <span class="bs-b"></span>
-  <span class="bs-k"></span>
-</div>
+<div class="bauhaus-stripe"><span class="bs-r"></span><span class="bs-y"></span><span class="bs-b"></span><span class="bs-k"></span></div>
 
 <header>
-  <div class="header-logo">
-    <div class="bauhaus-mark">
-      <div class="bauhaus-mark-circle"></div>
-      <div class="bauhaus-mark-rect"></div>
-    </div>
-    <div>
-      <div class="logo-text">FOTOLITO</div>
-      <div class="logo-sub">Studio</div>
-    </div>
-  </div>
-  <div class="header-badges">
-    <div class="hbadge red" data-i18n="badgeLocal">⬡ Lokal</div>
-    <div class="hbadge">A4 · 300 DPI</div>
+  <div class="header-title">
+    <span class="header-title-text">FotolitoStudio</span>
+    <span class="header-title-sub">· Siebdruck</span>
   </div>
   <div class="header-right">
     <nav class="lang-switcher" role="navigation" aria-label="Sprache / Language / Idioma">
-      <button class="lang-btn" data-lang="de" aria-pressed="false" title="Deutsch">DE</button>
-      <button class="lang-btn" data-lang="en" aria-pressed="false" title="English">EN</button>
-      <button class="lang-btn" data-lang="es" aria-pressed="false" title="Español">ES</button>
+      <button class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+      <button class="lang-btn" data-lang="en" title="English">EN</button>
+      <button class="lang-btn" data-lang="es" title="Español">ES</button>
     </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Farbschema wechseln">
-      <div class="theme-icon" aria-hidden="true">
-        <div class="theme-icon-inner">
-          <div class="theme-icon-half"></div>
-        </div>
-      </div>
-      <span id="themeLabel">HELL</span>
+    <button class="theme-toggle" id="themeToggle">
+      <div class="theme-half" aria-hidden="true"><div class="theme-half-fill"></div></div>
+      <span id="themeLabel">DUNKEL</span>
     </button>
   </div>
 </header>
 
 <div class="app">
+<aside class="sidebar">
 
-  <!-- ═══ SIDEBAR ═══════════════════════════ -->
-  <aside class="sidebar">
-
-    <!-- SCHRITT 1 -->
-    <div class="step active" id="step1">
-      <div class="step-header">
-        <div class="step-num">1</div>
-        <div class="step-title" data-i18n="step1Title">Bild hochladen</div>
-      </div>
-      <div class="step-body">
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.tiff,.tif" />
-          <div class="upload-icon">↑</div>
-          <div class="upload-text" data-i18n="uploadBtn">Bild hochladen</div>
-          <div class="upload-sub" data-i18n="uploadSub">JPG · PNG · WEBP · TIFF<br>oder hierher ziehen</div>
-        </div>
-        <div class="error-msg" id="errorMsg"></div>
-      </div>
+  <!-- STEP 1 -->
+  <div class="step active" id="step1">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title" data-i18n="step1Title">Bild hochladen</div>
     </div>
-
-    <!-- SCHRITT 2 -->
-    <div class="step" id="step2">
-      <div class="step-header">
-        <div class="step-num">2</div>
-        <div class="step-title" data-i18n="step2Title">Bild anpassen</div>
+    <div class="step-body">
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.tiff,.tif">
+        <div class="upload-icon">↑</div>
+        <div class="upload-text" data-i18n="uploadBtn">Bild hochladen</div>
+        <div class="upload-sub" data-i18n="uploadSub">JPG · PNG · WEBP · TIFF<br>oder hierher ziehen</div>
       </div>
-      <div class="step-body">
-        <div class="progress-bar"><div class="progress-fill" id="fillGray"></div></div>
-
-        <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelBrightness">Helligkeit</span><span class="ctrl-val" id="valBrightness">0</span></div>
-          <input type="range" id="brightness" min="-100" max="100" value="0">
-        </div>
-        <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelContrast">Kontrast</span><span class="ctrl-val" id="valContrast">0</span></div>
-          <input type="range" id="contrast" min="-100" max="100" value="0">
-        </div>
-        <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelExposure">Belichtung</span><span class="ctrl-val" id="valExposure">0</span></div>
-          <input type="range" id="exposure" min="-100" max="100" value="0">
-        </div>
-        <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelGamma">Gamma</span><span class="ctrl-val" id="valGamma">1.0</span></div>
-          <input type="range" id="gamma" min="1" max="30" value="10">
-        </div>
-        <button class="btn btn-secondary" id="resetBtn" data-i18n="resetBtn">↺ Zurücksetzen</button>
+      <!-- Image action bar: shown after upload -->
+      <div class="img-actions" id="imgActions">
+        <button class="btn btn-ghost btn-sm" id="previewRawBtn" style="flex:1" data-i18n="previewBtn">◎ Vorschau</button>
+        <button class="btn btn-danger btn-sm" id="clearBtn" style="flex:1" data-i18n="clearBtn">✕ Löschen</button>
       </div>
+      <div class="error-msg" id="errorMsg"></div>
     </div>
+  </div>
 
-    <!-- SCHRITT 3 -->
-    <div class="step" id="step3">
-      <div class="step-header">
-        <div class="step-num">3</div>
-        <div class="step-title" data-i18n="step3Title">Bitmap</div>
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title" data-i18n="step2Title">Bild anpassen</div>
+    </div>
+    <div class="step-body">
+      <div class="progress-bar"><div class="progress-fill" id="fillGray"></div></div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelBrightness">Helligkeit</span><span class="ctrl-val" id="valBrightness">0</span></div>
+        <input type="range" id="brightness" min="-100" max="100" value="0">
       </div>
-      <div class="step-body">
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelContrast">Kontrast</span><span class="ctrl-val" id="valContrast">0</span></div>
+        <input type="range" id="contrast" min="-100" max="100" value="0">
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelExposure">Belichtung</span><span class="ctrl-val" id="valExposure">0</span></div>
+        <input type="range" id="exposure" min="-100" max="100" value="0">
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelGamma">Gamma</span><span class="ctrl-val" id="valGamma">1.0</span></div>
+        <input type="range" id="gamma" min="1" max="30" value="10">
+      </div>
+      <button class="btn btn-ghost btn-sm" id="resetBtn" data-i18n="resetBtn" style="width:100%">↺ Zurücksetzen</button>
+    </div>
+  </div>
 
-        <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelResolution">Ausgabeauflösung</span></div>
-          <div class="select-wrap">
-            <select id="resolution">
-              <option value="150">150 dpi</option>
-              <option value="200">200 dpi</option>
-              <option value="300" selected data-i18n-opt="opt300ppp">300 dpi (empfohlen)</option>
-              <option value="600">600 dpi</option>
-              <option value="0" data-i18n-opt="optCustom">Benutzerdefiniert…</option>
-            </select>
-          </div>
-          <div id="customResWrap" style="margin-top:6px;display:none;">
-            <input type="number" id="customRes" min="72" max="1200" value="300">
-          </div>
-          <div class="note" style="margin-top:8px;margin-bottom:0" data-i18n="noteResolution">
-            Standard für Filmvorlagen: <strong>300 dpi</strong>.
-          </div>
+  <!-- STEP 3 -->
+  <div class="step" id="step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title" data-i18n="step3Title">Bitmap</div>
+    </div>
+    <div class="step-body">
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelResolution">Ausgabeauflösung</span></div>
+        <div class="select-wrap">
+          <select id="resolution">
+            <option value="150">150 dpi</option>
+            <option value="200">200 dpi</option>
+            <option value="300" selected data-i18n-opt="opt300ppp">300 dpi (empfohlen)</option>
+            <option value="600">600 dpi</option>
+            <option value="0" data-i18n-opt="optCustom">Benutzerdefiniert…</option>
+          </select>
         </div>
-
-        <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelMethod">Methode</span></div>
-          <div class="select-wrap">
-            <select id="method">
-              <option value="halftone" selected data-i18n-opt="methodHalftone">Halbtonraster</option>
-              <option value="diffusion" data-i18n-opt="methodDiffusion">Diffusion</option>
-              <option value="threshold" data-i18n-opt="methodThreshold">50%-Schwellenwert</option>
-              <option value="pattern" data-i18n-opt="methodPattern">Muster</option>
-            </select>
-          </div>
+        <div id="customResWrap" style="margin-top:6px;display:none;">
+          <input type="number" id="customRes" min="72" max="1200" value="300">
         </div>
-
-        <div id="halftoneOptions">
-          <div class="ctrl-group">
-            <div class="ctrl-label"><span data-i18n="labelLpi">Frequenz (LPI)</span><span class="ctrl-val" id="valLpi">30</span></div>
-            <input type="range" id="lpi" min="10" max="100" value="30">
-            <div class="lpi-explain" id="lpiExplain"></div>
-
-            <div class="mesh-calc">
-              <div class="mesh-calc-title" data-i18n="meshCalcTitle">▸ Geweberechner</div>
-              <div class="mesh-row">
-                <input type="number" id="meshInput" class="mesh-input" min="1" max="500" data-i18n-ph="meshPlaceholder">
-                <div class="mesh-result" id="meshResult">— LPI</div>
-              </div>
-              <div class="mesh-presets">
-                <button class="mesh-preset" data-mesh="43">43</button>
-                <button class="mesh-preset" data-mesh="61">61</button>
-                <button class="mesh-preset" data-mesh="77">77</button>
-                <button class="mesh-preset" data-mesh="90">90</button>
-                <button class="mesh-preset" data-mesh="120">120</button>
-                <button class="mesh-preset" data-mesh="150">150</button>
-                <button class="mesh-preset" data-mesh="180">180</button>
-              </div>
+        <div class="note" style="margin-top:8px;margin-bottom:0" data-i18n="noteResolution">Standard für Filmvorlagen: <strong>300 dpi</strong>.</div>
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelMethod">Methode</span></div>
+        <div class="select-wrap">
+          <select id="method">
+            <option value="halftone" selected data-i18n-opt="methodHalftone">Halbtonraster</option>
+            <option value="diffusion" data-i18n-opt="methodDiffusion">Diffusion</option>
+            <option value="threshold" data-i18n-opt="methodThreshold">50%-Schwellenwert</option>
+            <option value="pattern" data-i18n-opt="methodPattern">Muster</option>
+          </select>
+        </div>
+      </div>
+      <div id="halftoneOptions">
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="labelLpi">Frequenz (LPI)</span><span class="ctrl-val" id="valLpi">30</span></div>
+          <input type="range" id="lpi" min="10" max="100" value="30">
+          <div class="lpi-explain" id="lpiExplain"></div>
+          <div class="mesh-calc">
+            <div class="mesh-calc-title" data-i18n="meshCalcTitle">▸ Geweberechner</div>
+            <div class="mesh-row">
+              <input type="number" id="meshInput" class="mesh-input" min="1" max="500" data-i18n-ph="meshPlaceholder">
+              <div class="mesh-result" id="meshResult">— LPI</div>
             </div>
-          </div>
-
-          <div class="ctrl-group">
-            <div class="ctrl-label"><span data-i18n="labelAngle">Winkel</span></div>
-            <div class="select-wrap">
-              <select id="angle">
-                <option value="22.5">22.5°</option>
-                <option value="30">30°</option>
-                <option value="45" selected data-i18n-opt="opt45">45° (Standard)</option>
-                <option value="52.5">52.5°</option>
-                <option value="60">60°</option>
-                <option value="75">75°</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="ctrl-group">
-            <div class="ctrl-label"><span data-i18n="labelShape">Punktform</span></div>
-            <div class="shape-grid">
-              <button class="shape-btn active" data-shape="round" data-i18n-title="shapeRound" title="Rund">●</button>
-              <button class="shape-btn" data-shape="diamond" data-i18n-title="shapeDiamond" title="Raute">◆</button>
-              <button class="shape-btn" data-shape="square" data-i18n-title="shapeSquare" title="Quadrat">■</button>
-              <button class="shape-btn" data-shape="line" data-i18n-title="shapeLine" title="Linie">▬</button>
-              <button class="shape-btn" data-shape="cross" data-i18n-title="shapeCross" title="Kreuz">✚</button>
+            <div class="mesh-presets">
+              <button class="mesh-preset" data-mesh="43">43</button>
+              <button class="mesh-preset" data-mesh="61">61</button>
+              <button class="mesh-preset" data-mesh="77">77</button>
+              <button class="mesh-preset" data-mesh="90">90</button>
+              <button class="mesh-preset" data-mesh="120">120</button>
+              <button class="mesh-preset" data-mesh="150">150</button>
+              <button class="mesh-preset" data-mesh="180">180</button>
             </div>
           </div>
         </div>
-
         <div class="ctrl-group">
-          <div class="ctrl-label"><span data-i18n="labelFit">A4-Anpassung</span></div>
+          <div class="ctrl-label"><span data-i18n="labelAngle">Winkel</span></div>
           <div class="select-wrap">
-            <select id="fitMode">
-              <option value="fit" selected data-i18n-opt="fitFit">Einpassen (Seitenverhältnis)</option>
-              <option value="fill" data-i18n-opt="fitFill">Füllen</option>
-              <option value="original" data-i18n-opt="fitOriginal">Ohne Skalierung</option>
+            <select id="angle">
+              <option value="22.5">22.5°</option>
+              <option value="30">30°</option>
+              <option value="45" selected data-i18n-opt="opt45">45° (Standard)</option>
+              <option value="52.5">52.5°</option>
+              <option value="60">60°</option>
+              <option value="75">75°</option>
             </select>
           </div>
         </div>
-
-        <button class="btn btn-primary" id="convertBtn" disabled data-i18n="convertBtn">⊕ In Bitmap umwandeln</button>
-      </div>
-    </div>
-
-    <!-- EXPORT -->
-    <div class="export-panel">
-      <div class="progress-bar"><div class="progress-fill" id="fillExport"></div></div>
-      <button class="btn btn-blue" id="exportBtn" disabled data-i18n="exportBtn">↓ PNG erstellen</button>
-      <a id="downloadLink" style="display:none;">
-        <button class="btn btn-primary" style="margin-top:6px;" data-i18n="downloadBtn">✔ PNG herunterladen</button>
-      </a>
-    </div>
-
-  </aside>
-
-  <!-- ═══ MAIN ══════════════════════════════ -->
-  <main class="main">
-    <div class="toolbar">
-      <div class="zoom-btns">
-        <button class="zoom-btn" data-zoom="25">25%</button>
-        <button class="zoom-btn" data-zoom="50">50%</button>
-        <button class="zoom-btn active" data-zoom="100">100%</button>
-        <button class="zoom-btn" data-zoom="200">200%</button>
-        <button class="zoom-btn" data-zoom="400">400%</button>
-      </div>
-      <div class="toolbar-right">
-        <span id="imgInfo" data-i18n="noImage">Kein Bild</span>
-      </div>
-    </div>
-
-    <div class="preview-area">
-      <div class="preview-pane">
-        <div class="preview-label">
-          <div class="pv-dot pv-dot-orig"></div>
-          <span data-i18n="previewOrig">Original / Graustufen</span>
-        </div>
-        <div class="canvas-wrap">
-          <div class="empty-state" id="emptyOrig">
-            <div class="empty-icon">◌</div>
-            <div class="empty-text" data-i18n="emptyOrig">Bild hochladen,<br>um zu beginnen</div>
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="labelShape">Punktform</span></div>
+          <div class="shape-grid">
+            <button class="shape-btn active" data-shape="round" title="Rund" data-i18n-title="shapeRound">●</button>
+            <button class="shape-btn" data-shape="diamond" title="Raute" data-i18n-title="shapeDiamond">◆</button>
+            <button class="shape-btn" data-shape="square" title="Quadrat" data-i18n-title="shapeSquare">■</button>
+            <button class="shape-btn" data-shape="line" title="Linie" data-i18n-title="shapeLine">▬</button>
+            <button class="shape-btn" data-shape="cross" title="Kreuz" data-i18n-title="shapeCross">✚</button>
           </div>
-          <canvas id="grayCanvas" style="display:none;"></canvas>
         </div>
       </div>
-      <div class="preview-pane" style="border-left:2px solid var(--border)">
-        <div class="preview-label">
-          <div class="pv-dot pv-dot-result"></div>
-          <span data-i18n="previewResult">Rasterergebnis</span>
-        </div>
-        <div class="canvas-wrap">
-          <div class="empty-state" id="emptyResult">
-            <div class="empty-icon">◈</div>
-            <div class="empty-text" data-i18n="emptyResult">Klicke „In Bitmap umwandeln",<br>um das Ergebnis zu sehen</div>
-          </div>
-          <canvas id="halftoneCanvas" style="display:none;"></canvas>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span data-i18n="labelFit">A4-Anpassung</span></div>
+        <div class="select-wrap">
+          <select id="fitMode">
+            <option value="fit" selected data-i18n-opt="fitFit">Einpassen</option>
+            <option value="fill" data-i18n-opt="fitFill">Füllen</option>
+            <option value="original" data-i18n-opt="fitOriginal">Ohne Skalierung</option>
+          </select>
         </div>
       </div>
+      <!-- PRIMARY action: blue -->
+      <button class="btn btn-primary" id="convertBtn" disabled data-i18n="convertBtn">⊕ In Bitmap umwandeln</button>
     </div>
+  </div>
 
-    <div class="statusbar">
-      <div class="status-left">
-        <div class="status-dot ok" id="statusDot"></div>
-        <span id="statusText" data-i18n="statusReady">Bereit</span>
+  <!-- EXPORT -->
+  <div class="export-panel">
+    <div class="progress-bar"><div class="progress-fill" id="fillExport"></div></div>
+    <!-- PRIMARY action: blue -->
+    <button class="btn btn-primary" id="exportBtn" disabled data-i18n="exportBtn">↓ PNG erstellen</button>
+    <a id="downloadLink" style="display:none;">
+      <!-- SUCCESS: green — download complete -->
+      <button class="btn btn-success" style="margin-top:6px;" data-i18n="downloadBtn">✔ PNG herunterladen</button>
+    </a>
+  </div>
+
+</aside>
+
+<main class="main">
+  <div class="toolbar">
+    <div class="zoom-btns">
+      <button class="zoom-btn" data-zoom="25">25%</button>
+      <button class="zoom-btn" data-zoom="50">50%</button>
+      <button class="zoom-btn active" data-zoom="100">100%</button>
+      <button class="zoom-btn" data-zoom="200">200%</button>
+      <button class="zoom-btn" data-zoom="400">400%</button>
+    </div>
+    <div class="toolbar-right">
+      <span id="imgInfo" data-i18n="noImage">Kein Bild</span>
+    </div>
+  </div>
+
+  <div class="preview-area">
+    <div class="preview-pane">
+      <div class="preview-label">
+        <div class="pv-dot pv-orig"></div>
+        <span data-i18n="previewOrig">Original / Graustufen</span>
       </div>
-      <div class="status-mid" id="statusDim">—</div>
-      <div class="status-credits">
-        <a class="credit-link" href="mailto:domingadelsol@gmail.com">domingadelsol@gmail.com</a>
-        <span style="color:var(--border)">|</span>
-        <a class="credit-link" href="https://domingadelsol.github.io" target="_blank" rel="noopener">
-          Portfolio<span class="credit-arrow">↗</span>
-        </a>
+      <div class="canvas-wrap" id="origWrap">
+        <div class="empty-state" id="emptyOrig">
+          <div class="empty-icon">◌</div>
+          <div class="empty-text" data-i18n="emptyOrig">Bild hochladen,<br>um zu beginnen</div>
+        </div>
+        <canvas id="grayCanvas" style="display:none;"></canvas>
+        <!-- double-click hint shown on hover -->
+        <div class="dbl-hint" id="dblHint" data-i18n="dblHint">Doppelklick → A4-Position anpassen</div>
       </div>
     </div>
-  </main>
+    <div class="preview-pane" style="border-left:2px solid var(--border-strong)">
+      <div class="preview-label">
+        <div class="pv-dot pv-result"></div>
+        <span data-i18n="previewResult">Rasterergebnis</span>
+      </div>
+      <div class="canvas-wrap">
+        <div class="empty-state" id="emptyResult">
+          <div class="empty-icon">◈</div>
+          <div class="empty-text" data-i18n="emptyResult">„In Bitmap umwandeln"<br>drücken</div>
+        </div>
+        <canvas id="halftoneCanvas" style="display:none;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <div class="status-left">
+      <div class="status-dot ok" id="statusDot"></div>
+      <span id="statusText" data-i18n="statusReady">Bereit</span>
+    </div>
+    <div class="status-mid" id="statusDim">—</div>
+    <div class="status-credits">
+      <a class="credit-link" href="mailto:domingadelsol@gmail.com">domingadelsol@gmail.com</a>
+      <span style="color:var(--border)">|</span>
+      <a class="credit-link" href="https://domingadelsol.github.io" target="_blank" rel="noopener">Portfolio ↗</a>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODAL: CROP / POSITION EDITOR
+     Opens on double-click of the gray canvas
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="cropModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" data-i18n="cropTitle">Position &amp; Größe — A4</span>
+      <button class="modal-close" id="cropClose" title="Schließen" aria-label="Schließen">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="crop-stage-wrap">
+        <div class="crop-canvas-col">
+          <div class="a4-frame" id="a4Frame">
+            <img class="a4-img" id="a4Img" src="" alt="">
+            <div class="a4-corner-label">A4</div>
+          </div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:7px;text-align:center" data-i18n="cropDragHint">Ziehen zum Verschieben</div>
+        </div>
+        <div class="crop-controls-col">
+          <div class="ctrl-group">
+            <div class="ctrl-label"><span data-i18n="cropScale">Größe</span><span class="ctrl-val" id="cropScaleVal">100%</span></div>
+            <input type="range" id="cropScaleSlider" min="10" max="300" value="100">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label"><span data-i18n="cropOffX">Horizontal</span><span class="ctrl-val" id="cropOffXVal">0</span></div>
+            <input type="range" id="cropOffXSlider" min="-500" max="500" value="0">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label"><span data-i18n="cropOffY">Vertikal</span><span class="ctrl-val" id="cropOffYVal">0</span></div>
+            <input type="range" id="cropOffYSlider" min="-500" max="500" value="0">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <button class="btn btn-secondary btn-sm" id="cropFitBtn" data-i18n="cropFitBtn">Einpassen</button>
+            <button class="btn btn-secondary btn-sm" id="cropFillBtn" data-i18n="cropFillBtn">Füllen</button>
+            <button class="btn btn-ghost btn-sm" id="cropResetBtn" data-i18n="cropResetBtn">↺ Zurücksetzen</button>
+          </div>
+          <div style="margin-top:auto; padding-top:12px; display:flex; flex-direction:column; gap:6px;">
+            <button class="btn btn-primary" id="cropApplyBtn" data-i18n="cropApplyBtn">✔ Übernehmen</button>
+            <button class="btn btn-danger btn-sm" id="cropCancelBtn" data-i18n="cancelBtn">Abbrechen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODAL: PREVIEW (final rendered look)
+══════════════════════════════════════════ -->
+<div class="modal-overlay preview-modal" id="previewModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" data-i18n="previewModalTitle">Vorschau — Fotolito A4</span>
+      <button class="modal-close" id="previewClose" aria-label="Schließen">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="preview-canvas-wrap">
+        <canvas id="previewFinalCanvas"></canvas>
+      </div>
+      <div class="preview-note" data-i18n="previewNote">Dies ist eine verkleinerte Vorschau des finalen Fotolits mit transparentem Hintergrund.</div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="btn btn-ghost btn-sm" id="previewCloseBtn" data-i18n="closeBtn" style="flex:1">Schließen</button>
+        <button class="btn btn-primary btn-sm" id="previewConvertBtn" data-i18n="convertBtn" style="flex:2">⊕ In Bitmap umwandeln</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <canvas id="sourceCanvas" style="display:none;"></canvas>
+<canvas id="cropOutputCanvas" style="display:none;"></canvas>
 
 <script>
 /* ════════════════════════════════════════════
-   I18N DICTIONARY
+   I18N
 ════════════════════════════════════════════ */
 const i18n = {
   de: {
-    badgeLocal:'⬡ Lokal · Kein Server', step1Title:'Bild hochladen', step2Title:'Bild anpassen', step3Title:'Bitmap',
+    badgeLocal:'⬡ Lokal', step1Title:'Bild hochladen', step2Title:'Bild anpassen', step3Title:'Bitmap',
     uploadBtn:'Bild hochladen', uploadSub:'JPG · PNG · WEBP · TIFF<br>oder hierher ziehen',
     labelBrightness:'Helligkeit', labelContrast:'Kontrast', labelExposure:'Belichtung', labelGamma:'Gamma',
     resetBtn:'↺ Zurücksetzen', labelResolution:'Ausgabeauflösung',
@@ -895,14 +754,24 @@ const i18n = {
     labelLpi:'Frequenz (LPI)', meshCalcTitle:'▸ Geweberechner', meshPlaceholder:'Gewebe (z.B. 120)',
     labelAngle:'Winkel', opt45:'45° (Standard)', labelShape:'Punktform',
     shapeRound:'Rund', shapeDiamond:'Raute', shapeSquare:'Quadrat', shapeLine:'Linie', shapeCross:'Kreuz',
-    labelFit:'A4-Anpassung', fitFit:'Einpassen (Seitenverhältnis)', fitFill:'Füllen', fitOriginal:'Ohne Skalierung',
+    labelFit:'A4-Anpassung', fitFit:'Einpassen', fitFill:'Füllen', fitOriginal:'Ohne Skalierung',
     convertBtn:'⊕ In Bitmap umwandeln', exportBtn:'↓ PNG erstellen', downloadBtn:'✔ PNG herunterladen',
+    previewBtn:'◎ Vorschau', clearBtn:'✕ Löschen',
     noImage:'Kein Bild', previewOrig:'Original / Graustufen', previewResult:'Rasterergebnis',
-    emptyOrig:'Bild hochladen,<br>um zu beginnen', emptyResult:'Klicke „In Bitmap umwandeln",<br>um das Ergebnis zu sehen',
+    emptyOrig:'Bild hochladen,<br>um zu beginnen', emptyResult:'„In Bitmap umwandeln"<br>drücken',
+    dblHint:'Doppelklick → A4-Position anpassen',
+    cropTitle:'Position &amp; Größe — A4', cropDragHint:'Ziehen zum Verschieben',
+    cropScale:'Größe', cropOffX:'Horizontal', cropOffY:'Vertikal',
+    cropFitBtn:'Einpassen', cropFillBtn:'Füllen', cropResetBtn:'↺ Zurücksetzen',
+    cropApplyBtn:'✔ Übernehmen', cancelBtn:'Abbrechen',
+    previewModalTitle:'Vorschau — Fotolito A4',
+    previewNote:'Verkleinerte Vorschau des finalen Fotolits (transparenter Hintergrund).',
+    closeBtn:'Schließen',
     statusReady:'Bereit', statusLoading:'Bild wird geladen…', statusLoaded:'Bild geladen',
     statusGenerating:'Raster wird erstellt…', statusGenerated:(w,h)=>`Raster erstellt · A4 ${w}×${h}px`,
     statusExporting:'PNG wird exportiert…', statusExported:'PNG erfolgreich exportiert',
-    errFormat:'Format nicht unterstützt. Bitte JPG, PNG, WEBP oder TIFF verwenden.',
+    statusCleared:'Bild entfernt',
+    errFormat:'Format nicht unterstützt. Bitte JPG, PNG, WEBP oder TIFF.',
     errExport:m=>'Exportfehler: '+m,
     lpiCoarse:'Sehr grobes Raster. Mit bloßem Auge sichtbar.',
     lpiThick:'Grobes Raster. Geeignet für Textilien.',
@@ -912,10 +781,10 @@ const i18n = {
     themeDark:'DUNKEL', themeLight:'HELL',
   },
   en: {
-    badgeLocal:'⬡ Local · No server', step1Title:'Upload image', step2Title:'Adjust image', step3Title:'Bitmap',
+    badgeLocal:'⬡ Local', step1Title:'Upload image', step2Title:'Adjust image', step3Title:'Bitmap',
     uploadBtn:'Upload image', uploadSub:'JPG · PNG · WEBP · TIFF<br>or drag and drop here',
     labelBrightness:'Brightness', labelContrast:'Contrast', labelExposure:'Exposure', labelGamma:'Gamma',
-    resetBtn:'↺ Reset adjustments', labelResolution:'Output resolution',
+    resetBtn:'↺ Reset', labelResolution:'Output resolution',
     opt300ppp:'300 dpi (recommended)', optCustom:'Custom…',
     noteResolution:'Standard resolution for film positives: <strong>300 dpi</strong>.',
     labelMethod:'Method', methodHalftone:'Halftone screen', methodDiffusion:'Diffusion',
@@ -923,13 +792,23 @@ const i18n = {
     labelLpi:'Frequency (LPI)', meshCalcTitle:'▸ Mesh calculator', meshPlaceholder:'Mesh (e.g. 120)',
     labelAngle:'Angle', opt45:'45° (default)', labelShape:'Dot shape',
     shapeRound:'Round', shapeDiamond:'Diamond', shapeSquare:'Square', shapeLine:'Line', shapeCross:'Cross',
-    labelFit:'Fit on A4', fitFit:'Fit (keep ratio)', fitFill:'Fill', fitOriginal:'No scaling',
+    labelFit:'Fit on A4', fitFit:'Fit', fitFill:'Fill', fitOriginal:'No scaling',
     convertBtn:'⊕ Convert to bitmap', exportBtn:'↓ Generate PNG', downloadBtn:'✔ Download PNG',
+    previewBtn:'◎ Preview', clearBtn:'✕ Discard',
     noImage:'No image', previewOrig:'Original / Grayscale', previewResult:'Halftone result',
-    emptyOrig:'Upload an image<br>to get started', emptyResult:'Click "Convert to bitmap"<br>to see the result',
+    emptyOrig:'Upload an image<br>to get started', emptyResult:'Click "Convert to bitmap"',
+    dblHint:'Double-click → adjust A4 position',
+    cropTitle:'Position &amp; size — A4', cropDragHint:'Drag to reposition',
+    cropScale:'Scale', cropOffX:'Horizontal', cropOffY:'Vertical',
+    cropFitBtn:'Fit', cropFillBtn:'Fill', cropResetBtn:'↺ Reset',
+    cropApplyBtn:'✔ Apply', cancelBtn:'Cancel',
+    previewModalTitle:'Preview — Fotolito A4',
+    previewNote:'Scaled preview of the final fotolito (transparent background).',
+    closeBtn:'Close',
     statusReady:'Ready', statusLoading:'Loading image…', statusLoaded:'Image loaded',
     statusGenerating:'Generating halftone…', statusGenerated:(w,h)=>`Halftone generated · A4 ${w}×${h}px`,
     statusExporting:'Exporting PNG…', statusExported:'PNG exported successfully',
+    statusCleared:'Image removed',
     errFormat:'Unsupported format. Please use JPG, PNG, WEBP or TIFF.',
     errExport:m=>'Export error: '+m,
     lpiCoarse:'Very coarse screen. Visible to the naked eye.',
@@ -940,7 +819,7 @@ const i18n = {
     themeDark:'DARK', themeLight:'LIGHT',
   },
   es: {
-    badgeLocal:'⬡ Local · Sin servidor', step1Title:'Subir imagen', step2Title:'Ajustar imagen', step3Title:'Mapa de bits',
+    badgeLocal:'⬡ Local', step1Title:'Subir imagen', step2Title:'Ajustar imagen', step3Title:'Mapa de bits',
     uploadBtn:'Subir imagen', uploadSub:'JPG · PNG · WEBP · TIFF<br>o arrastra y suelta aquí',
     labelBrightness:'Brillo', labelContrast:'Contraste', labelExposure:'Exposición', labelGamma:'Gamma',
     resetBtn:'↺ Restablecer', labelResolution:'Resolución de salida',
@@ -951,13 +830,23 @@ const i18n = {
     labelLpi:'Frecuencia (LPI)', meshCalcTitle:'▸ Calculadora de malla', meshPlaceholder:'Malla (p.ej. 120)',
     labelAngle:'Ángulo', opt45:'45° (predeterminado)', labelShape:'Forma del punto',
     shapeRound:'Redondo', shapeDiamond:'Diamante', shapeSquare:'Cuadrado', shapeLine:'Línea', shapeCross:'Cruz',
-    labelFit:'Ajuste en A4', fitFit:'Ajustar (mantener proporción)', fitFill:'Rellenar', fitOriginal:'Sin escalar',
+    labelFit:'Ajuste en A4', fitFit:'Ajustar', fitFill:'Rellenar', fitOriginal:'Sin escalar',
     convertBtn:'⊕ Convertir a mapa de bits', exportBtn:'↓ Generar PNG', downloadBtn:'✔ Descargar PNG',
+    previewBtn:'◎ Vista previa', clearBtn:'✕ Descartar',
     noImage:'Sin imagen', previewOrig:'Original / Escala de grises', previewResult:'Resultado tramado',
-    emptyOrig:'Sube una imagen<br>para comenzar', emptyResult:'Pulsa "Convertir a mapa de bits"<br>para ver el resultado',
+    emptyOrig:'Sube una imagen<br>para comenzar', emptyResult:'Pulsa "Convertir a mapa de bits"',
+    dblHint:'Doble clic → ajustar posición en A4',
+    cropTitle:'Posición &amp; tamaño — A4', cropDragHint:'Arrastra para reposicionar',
+    cropScale:'Tamaño', cropOffX:'Horizontal', cropOffY:'Vertical',
+    cropFitBtn:'Ajustar', cropFillBtn:'Rellenar', cropResetBtn:'↺ Restablecer',
+    cropApplyBtn:'✔ Aplicar', cancelBtn:'Cancelar',
+    previewModalTitle:'Vista previa — Fotolito A4',
+    previewNote:'Vista previa reducida del fotolito final (fondo transparente).',
+    closeBtn:'Cerrar',
     statusReady:'Listo', statusLoading:'Cargando imagen…', statusLoaded:'Imagen cargada',
     statusGenerating:'Generando trama…', statusGenerated:(w,h)=>`Trama generada · A4 ${w}×${h}px`,
     statusExporting:'Exportando PNG…', statusExported:'PNG exportado correctamente',
+    statusCleared:'Imagen eliminada',
     errFormat:'Formato no admitido. Usa JPG, PNG, WEBP o TIFF.',
     errExport:m=>'Error al exportar: '+m,
     lpiCoarse:'Trama muy gruesa. Visible a simple vista.',
@@ -970,50 +859,35 @@ const i18n = {
 };
 
 /* ════════════════════════════════════════════
-   LANGUAGE ENGINE
+   LANG ENGINE
 ════════════════════════════════════════════ */
 let currentLang = 'de';
-
 function applyLang(lang) {
   currentLang = lang;
   const t = i18n[lang];
   document.documentElement.lang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => {
-    const active = b.dataset.lang === lang;
-    b.classList.toggle('active', active);
-    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    b.classList.toggle('active', b.dataset.lang === lang);
+    b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
   });
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.dataset.i18n;
-    if (t[k] !== undefined) el.innerHTML = t[k];
-  });
-  document.querySelectorAll('[data-i18n-opt]').forEach(el => {
-    const k = el.dataset.i18nOpt;
-    if (t[k] !== undefined) el.textContent = t[k];
-  });
-  document.querySelectorAll('[data-i18n-title]').forEach(el => {
-    const k = el.dataset.i18nTitle;
-    if (t[k] !== undefined) el.title = t[k];
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-    const k = el.dataset.i18nPh;
-    if (t[k] !== undefined) el.placeholder = t[k];
-  });
+  document.querySelectorAll('[data-i18n]').forEach(el => { if(t[el.dataset.i18n]!==undefined) el.innerHTML=t[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-opt]').forEach(el => { if(t[el.dataset.i18nOpt]!==undefined) el.textContent=t[el.dataset.i18nOpt]; });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => { if(t[el.dataset.i18nTitle]!==undefined) el.title=t[el.dataset.i18nTitle]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { if(t[el.dataset.i18nPh]!==undefined) el.placeholder=t[el.dataset.i18nPh]; });
   updateLpiExplain();
   updateThemeLabel();
 }
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 
 /* ════════════════════════════════════════════
-   THEME ENGINE
+   THEME
 ════════════════════════════════════════════ */
 function updateThemeLabel() {
   const dark = document.documentElement.dataset.mode === 'dark';
   document.getElementById('themeLabel').textContent = dark ? i18n[currentLang].themeLight : i18n[currentLang].themeDark;
 }
 document.getElementById('themeToggle').addEventListener('click', () => {
-  const html = document.documentElement;
-  html.dataset.mode = html.dataset.mode === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.mode = document.documentElement.dataset.mode === 'dark' ? 'light' : 'dark';
   updateThemeLabel();
 });
 
@@ -1022,28 +896,35 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 ════════════════════════════════════════════ */
 const state = {
   originalImage:null, brightness:0, contrast:0, exposure:0, gamma:1.0,
-  resolution:300, method:'halftone', lpi:30, angle:45, shape:'round', fitMode:'fit', zoom:1.0
+  resolution:300, method:'halftone', lpi:30, angle:45, shape:'round', fitMode:'fit', zoom:1.0,
+  // crop/position state (relative to A4 frame, in %)
+  cropScale:100, cropOffX:0, cropOffY:0,
 };
 
 /* ════════════════════════════════════════════
-   CANVAS ELEMENTS
+   CANVAS REFS
 ════════════════════════════════════════════ */
-const grayCanvas=document.getElementById('grayCanvas');
-const halftoneCanvas=document.getElementById('halftoneCanvas');
-const sourceCanvas=document.getElementById('sourceCanvas');
-const grayCtx=grayCanvas.getContext('2d');
-const htCtx=halftoneCanvas.getContext('2d');
-const srcCtx=sourceCanvas.getContext('2d');
-const errorMsg=document.getElementById('errorMsg');
-const convertBtn=document.getElementById('convertBtn');
-const exportBtn=document.getElementById('exportBtn');
-const downloadLink=document.getElementById('downloadLink');
+const grayCanvas     = document.getElementById('grayCanvas');
+const halftoneCanvas = document.getElementById('halftoneCanvas');
+const sourceCanvas   = document.getElementById('sourceCanvas');
+const cropOutCanvas  = document.getElementById('cropOutputCanvas');
+const grayCtx  = grayCanvas.getContext('2d');
+const htCtx    = halftoneCanvas.getContext('2d');
+const srcCtx   = sourceCanvas.getContext('2d');
+const cropOutCtx = cropOutCanvas.getContext('2d');
+
+const errorMsg   = document.getElementById('errorMsg');
+const convertBtn = document.getElementById('convertBtn');
+const exportBtn  = document.getElementById('exportBtn');
+const downloadLink = document.getElementById('downloadLink');
+const imgActions = document.getElementById('imgActions');
+const origWrap   = document.getElementById('origWrap');
 
 /* ════════════════════════════════════════════
    FILE UPLOAD
 ════════════════════════════════════════════ */
-const uploadZone=document.getElementById('uploadZone');
-const fileInput=document.getElementById('fileInput');
+const uploadZone = document.getElementById('uploadZone');
+const fileInput  = document.getElementById('fileInput');
 
 function handleFile(file) {
   if (!file) return;
@@ -1056,6 +937,8 @@ function handleFile(file) {
     const img = new Image();
     img.onload = () => {
       state.originalImage = img;
+      // reset crop to default
+      state.cropScale = 100; state.cropOffX = 0; state.cropOffY = 0;
       setStatus('processing'); setStatusText(i18n[currentLang].statusLoading);
       setTimeout(() => {
         drawGray();
@@ -1064,6 +947,7 @@ function handleFile(file) {
         convertBtn.disabled = false;
         document.getElementById('emptyOrig').style.display = 'none';
         grayCanvas.style.display = '';
+        imgActions.classList.add('visible');
         const info = document.getElementById('imgInfo');
         info.textContent = `${img.naturalWidth}×${img.naturalHeight}px · ${(file.size/1024).toFixed(0)} KB`;
         info.removeAttribute('data-i18n');
@@ -1081,26 +965,74 @@ uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag
 uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
 
 /* ════════════════════════════════════════════
-   GRAYSCALE
+   CLEAR (Löschen) — DANGER action
+════════════════════════════════════════════ */
+document.getElementById('clearBtn').addEventListener('click', () => {
+  state.originalImage = null;
+  grayCanvas.style.display = 'none';
+  halftoneCanvas.style.display = 'none';
+  document.getElementById('emptyOrig').style.display = '';
+  document.getElementById('emptyResult').style.display = '';
+  imgActions.classList.remove('visible');
+  convertBtn.disabled = true;
+  exportBtn.disabled = true;
+  downloadLink.style.display = 'none';
+  fileInput.value = '';
+  const info = document.getElementById('imgInfo');
+  info.setAttribute('data-i18n', 'noImage');
+  info.textContent = i18n[currentLang].noImage;
+  document.getElementById('statusDim').textContent = '—';
+  // reset steps
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step3').classList.remove('active');
+  setStatus('ok'); setStatusText(i18n[currentLang].statusCleared);
+  hideError();
+});
+
+/* ════════════════════════════════════════════
+   GRAYSCALE RENDERING
 ════════════════════════════════════════════ */
 function drawGray() {
   if (!state.originalImage) return;
   const img = state.originalImage;
-  const W = Math.min(img.naturalWidth, 2480);
-  const H = Math.round(W * img.naturalHeight / img.naturalWidth);
-  sourceCanvas.width = W; sourceCanvas.height = H;
-  grayCanvas.width = W; grayCanvas.height = H;
-  srcCtx.drawImage(img, 0, 0, W, H);
-  const s = srcCtx.getImageData(0, 0, W, H);
-  const g = grayCtx.createImageData(W, H);
-  const {brightness:br,contrast:co,exposure:ex,gamma:ga} = state;
-  for (let i=0;i<s.data.length;i+=4) {
+
+  // A4 at 300dpi for the working canvas (for cropped output)
+  const A4_W = Math.round(8.2677 * 300), A4_H = Math.round(11.6929 * 300);
+
+  // Compute placement from crop state
+  const scaleFactor = state.cropScale / 100;
+  const imgW = Math.round(img.naturalWidth * scaleFactor);
+  const imgH = Math.round(img.naturalHeight * scaleFactor);
+  const baseX = Math.round((A4_W - imgW) / 2);
+  const baseY = Math.round((A4_H - imgH) / 2);
+  const imgX = baseX + state.cropOffX;
+  const imgY = baseY + state.cropOffY;
+
+  // Draw into cropOutput at A4 size
+  cropOutCanvas.width = A4_W; cropOutCanvas.height = A4_H;
+  cropOutCtx.clearRect(0, 0, A4_W, A4_H);
+  cropOutCtx.drawImage(img, imgX, imgY, imgW, imgH);
+
+  // Display version: scale down to fit display (max 1200px wide)
+  const dispScale = Math.min(1, 1200 / A4_W);
+  const dispW = Math.round(A4_W * dispScale);
+  const dispH = Math.round(A4_H * dispScale);
+
+  grayCanvas.width = dispW; grayCanvas.height = dispH;
+  sourceCanvas.width = dispW; sourceCanvas.height = dispH;
+
+  // Draw cropOutCanvas scaled to display size
+  srcCtx.drawImage(cropOutCanvas, 0, 0, dispW, dispH);
+  const s = srcCtx.getImageData(0, 0, dispW, dispH);
+  const g = grayCtx.createImageData(dispW, dispH);
+  const {brightness:br, contrast:co, exposure:ex, gamma:ga} = state;
+  for (let i=0; i<s.data.length; i+=4) {
     let v = 0.299*s.data[i] + 0.587*s.data[i+1] + 0.114*s.data[i+2];
-    v += br*2.55;
-    const cf = (259*(co+255))/(255*(259-co));
+    v += br * 2.55;
+    const cf = (259*(co+255)) / (255*(259-co));
     v = cf*(v-128)+128;
     v *= Math.pow(2, ex/50);
-    v = 255*Math.pow(v/255, 1/ga);
+    v = 255 * Math.pow(v/255, 1/ga);
     v = Math.max(0, Math.min(255, v));
     g.data[i]=g.data[i+1]=g.data[i+2]=v; g.data[i+3]=s.data[i+3];
   }
@@ -1111,125 +1043,320 @@ function drawGray() {
 /* ════════════════════════════════════════════
    SLIDERS
 ════════════════════════════════════════════ */
-function syncSlider(id,valId,key,xf) {
-  const el=document.getElementById(id);
-  el.addEventListener('input',()=>{
-    const raw=parseFloat(el.value);
-    state[key]=xf?xf(raw):raw;
-    document.getElementById(valId).textContent=xf?state[key].toFixed(1):raw;
+function syncSlider(id, valId, key, xf) {
+  document.getElementById(id).addEventListener('input', function() {
+    const raw = parseFloat(this.value);
+    state[key] = xf ? xf(raw) : raw;
+    document.getElementById(valId).textContent = xf ? state[key].toFixed(1) : raw;
     drawGray();
   });
 }
 syncSlider('brightness','valBrightness','brightness');
 syncSlider('contrast','valContrast','contrast');
 syncSlider('exposure','valExposure','exposure');
-syncSlider('gamma','valGamma','gamma',v=>parseFloat((v/10).toFixed(1)));
+syncSlider('gamma','valGamma','gamma', v => parseFloat((v/10).toFixed(1)));
 
-document.getElementById('resetBtn').addEventListener('click',()=>{
-  ['brightness','contrast','exposure'].forEach(id=>{ document.getElementById(id).value=0; state[id]=0; document.getElementById('val'+id.charAt(0).toUpperCase()+id.slice(1)).textContent='0'; });
-  document.getElementById('gamma').value=10; state.gamma=1.0; document.getElementById('valGamma').textContent='1.0';
+document.getElementById('resetBtn').addEventListener('click', () => {
+  ['brightness','contrast','exposure'].forEach(id => {
+    document.getElementById(id).value = 0; state[id] = 0;
+    const vId = 'val' + id.charAt(0).toUpperCase() + id.slice(1);
+    document.getElementById(vId).textContent = '0';
+  });
+  document.getElementById('gamma').value = 10; state.gamma = 1.0;
+  document.getElementById('valGamma').textContent = '1.0';
   drawGray();
 });
 
-const lpiEl=document.getElementById('lpi');
-lpiEl.addEventListener('input',()=>{
-  state.lpi=parseInt(lpiEl.value);
-  document.getElementById('valLpi').textContent=state.lpi;
+const lpiEl = document.getElementById('lpi');
+lpiEl.addEventListener('input', () => {
+  state.lpi = parseInt(lpiEl.value);
+  document.getElementById('valLpi').textContent = state.lpi;
   updateLpiExplain();
 });
-function updateLpiExplain(){
-  const t=i18n[currentLang]; const lpi=state.lpi;
-  const hint=lpi<=20?t.lpiCoarse:lpi<=40?t.lpiThick:lpi<=60?t.lpiStd:lpi<=80?t.lpiFine:t.lpiVFine;
-  document.getElementById('lpiExplain').textContent=`${lpi} LPI · ${hint}`;
+function updateLpiExplain() {
+  const t = i18n[currentLang], lpi = state.lpi;
+  const hint = lpi<=20?t.lpiCoarse:lpi<=40?t.lpiThick:lpi<=60?t.lpiStd:lpi<=80?t.lpiFine:t.lpiVFine;
+  document.getElementById('lpiExplain').textContent = `${lpi} LPI · ${hint}`;
 }
 
-const meshInput=document.getElementById('meshInput');
-meshInput.addEventListener('input',()=>{
-  const m=parseInt(meshInput.value);
-  if(!isNaN(m)&&m>0){
-    const lpi=Math.round(m/2);
-    document.getElementById('meshResult').textContent=lpi+' LPI';
-    lpiEl.value=Math.min(100,Math.max(10,lpi));
-    state.lpi=parseInt(lpiEl.value);
-    document.getElementById('valLpi').textContent=state.lpi;
+const meshInput = document.getElementById('meshInput');
+meshInput.addEventListener('input', () => {
+  const m = parseInt(meshInput.value);
+  if (!isNaN(m) && m > 0) {
+    const lpi = Math.round(m/2);
+    document.getElementById('meshResult').textContent = lpi+' LPI';
+    lpiEl.value = Math.min(100, Math.max(10, lpi));
+    state.lpi = parseInt(lpiEl.value);
+    document.getElementById('valLpi').textContent = state.lpi;
     updateLpiExplain();
-  } else { document.getElementById('meshResult').textContent='— LPI'; }
+  } else { document.getElementById('meshResult').textContent = '— LPI'; }
 });
-document.querySelectorAll('.mesh-preset').forEach(b=>b.addEventListener('click',()=>{ meshInput.value=b.dataset.mesh; meshInput.dispatchEvent(new Event('input')); }));
+document.querySelectorAll('.mesh-preset').forEach(b => b.addEventListener('click', () => {
+  meshInput.value = b.dataset.mesh; meshInput.dispatchEvent(new Event('input'));
+}));
 
-document.getElementById('resolution').addEventListener('change',function(){
-  const v=parseInt(this.value);
-  document.getElementById('customResWrap').style.display=v===0?'':'none';
-  state.resolution=v===0?(parseInt(document.getElementById('customRes').value)||300):v;
+document.getElementById('resolution').addEventListener('change', function() {
+  const v = parseInt(this.value);
+  document.getElementById('customResWrap').style.display = v===0 ? '' : 'none';
+  state.resolution = v===0 ? (parseInt(document.getElementById('customRes').value)||300) : v;
 });
-document.getElementById('customRes').addEventListener('input',e=>{ state.resolution=parseInt(e.target.value)||300; });
-document.getElementById('method').addEventListener('change',function(){ state.method=this.value; document.getElementById('halftoneOptions').style.display=this.value==='halftone'?'':'none'; });
-document.getElementById('angle').addEventListener('change',function(){ state.angle=parseFloat(this.value); });
-document.querySelectorAll('.shape-btn').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.shape-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); state.shape=b.dataset.shape; }));
-document.getElementById('fitMode').addEventListener('change',function(){ state.fitMode=this.value; });
+document.getElementById('customRes').addEventListener('input', e => { state.resolution = parseInt(e.target.value)||300; });
+document.getElementById('method').addEventListener('change', function() {
+  state.method = this.value;
+  document.getElementById('halftoneOptions').style.display = this.value==='halftone' ? '' : 'none';
+});
+document.getElementById('angle').addEventListener('change', function() { state.angle = parseFloat(this.value); });
+document.querySelectorAll('.shape-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.shape-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active'); state.shape = b.dataset.shape;
+}));
+document.getElementById('fitMode').addEventListener('change', function() { state.fitMode = this.value; });
 
 /* ════════════════════════════════════════════
    ZOOM
 ════════════════════════════════════════════ */
-document.querySelectorAll('.zoom-btn').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.zoom-btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); state.zoom=parseInt(b.dataset.zoom)/100;
+document.querySelectorAll('.zoom-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.zoom-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active'); state.zoom = parseInt(b.dataset.zoom)/100;
   applyZoom(grayCanvas); applyZoom(halftoneCanvas);
 }));
-function applyZoom(c){
-  if(c.style.display==='none') return;
-  c.style.transform=`scale(${state.zoom})`;
-  c.style.transformOrigin='center center';
-  c.style.maxWidth=state.zoom>1?'none':'100%';
-  c.style.maxHeight=state.zoom>1?'none':'100%';
+function applyZoom(c) {
+  if (c.style.display === 'none') return;
+  c.style.transform = `scale(${state.zoom})`;
+  c.style.transformOrigin = 'center center';
+  c.style.maxWidth = state.zoom>1?'none':'100%';
+  c.style.maxHeight = state.zoom>1?'none':'100%';
+}
+
+/* ════════════════════════════════════════════
+   DOUBLE-CLICK → CROP MODAL
+════════════════════════════════════════════ */
+grayCanvas.addEventListener('dblclick', () => openCropModal());
+
+function openCropModal() {
+  if (!state.originalImage) return;
+  // Sync sliders to current crop state
+  document.getElementById('cropScaleSlider').value = state.cropScale;
+  document.getElementById('cropScaleVal').textContent = state.cropScale+'%';
+  document.getElementById('cropOffXSlider').value = state.cropOffX;
+  document.getElementById('cropOffXVal').textContent = state.cropOffX;
+  document.getElementById('cropOffYSlider').value = state.cropOffY;
+  document.getElementById('cropOffYVal').textContent = state.cropOffY;
+  updateA4Preview();
+  document.getElementById('cropModal').classList.add('open');
+}
+document.getElementById('cropClose').addEventListener('click', () => document.getElementById('cropModal').classList.remove('open'));
+document.getElementById('cropCancelBtn').addEventListener('click', () => document.getElementById('cropModal').classList.remove('open'));
+document.getElementById('cropModal').addEventListener('click', e => { if (e.target===document.getElementById('cropModal')) document.getElementById('cropModal').classList.remove('open'); });
+
+/* A4 preview inside crop modal */
+function updateA4Preview() {
+  const frame = document.getElementById('a4Frame');
+  const img   = document.getElementById('a4Img');
+  if (!state.originalImage) return;
+  img.src = state.originalImage.src;
+
+  const frameW = frame.clientWidth || 280;
+  const frameH = frame.clientHeight || Math.round(frameW * 297/210);
+
+  // A4 reference is 2480×3508 (300dpi). Scale to frame.
+  const A4_W = 2480, A4_H = 3508;
+  const pxToFrame = frameW / A4_W;
+
+  const sc = state.cropScale / 100;
+  const iW = Math.round(state.originalImage.naturalWidth * sc * pxToFrame);
+  const iH = Math.round(state.originalImage.naturalHeight * sc * pxToFrame);
+  const baseX = Math.round((frameW - iW)/2);
+  const baseY = Math.round((frameH - iH)/2);
+  const fx = baseX + Math.round(state.cropOffX * pxToFrame);
+  const fy = baseY + Math.round(state.cropOffY * pxToFrame);
+
+  img.style.width  = iW+'px';
+  img.style.height = iH+'px';
+  img.style.left   = fx+'px';
+  img.style.top    = fy+'px';
+}
+
+/* Crop sliders */
+function cropSlider(id, valId, key, suffix) {
+  document.getElementById(id).addEventListener('input', function() {
+    state[key] = parseFloat(this.value);
+    document.getElementById(valId).textContent = Math.round(state[key]) + (suffix||'');
+    updateA4Preview();
+  });
+}
+cropSlider('cropScaleSlider','cropScaleVal','cropScale','%');
+cropSlider('cropOffXSlider','cropOffXVal','cropOffX','');
+cropSlider('cropOffYSlider','cropOffYVal','cropOffY','');
+
+/* Drag inside a4Frame */
+const a4Frame = document.getElementById('a4Frame');
+let dragging = false, dragStartX=0, dragStartY=0, dragStartOffX=0, dragStartOffY=0;
+a4Frame.addEventListener('mousedown', e => {
+  dragging=true; dragStartX=e.clientX; dragStartY=e.clientY;
+  dragStartOffX=state.cropOffX; dragStartOffY=state.cropOffY;
+  a4Frame.classList.add('grabbing');
+});
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const frameW = a4Frame.clientWidth || 280;
+  const A4_W = 2480;
+  const pxToFrame = frameW / A4_W;
+  const dx = Math.round((e.clientX - dragStartX) / pxToFrame);
+  const dy = Math.round((e.clientY - dragStartY) / pxToFrame);
+  state.cropOffX = dragStartOffX + dx;
+  state.cropOffY = dragStartOffY + dy;
+  document.getElementById('cropOffXSlider').value = Math.max(-500, Math.min(500, state.cropOffX));
+  document.getElementById('cropOffYSlider').value = Math.max(-500, Math.min(500, state.cropOffY));
+  document.getElementById('cropOffXVal').textContent = Math.round(state.cropOffX);
+  document.getElementById('cropOffYVal').textContent = Math.round(state.cropOffY);
+  updateA4Preview();
+});
+window.addEventListener('mouseup', () => { dragging=false; a4Frame.classList.remove('grabbing'); });
+
+/* Fit / Fill presets */
+document.getElementById('cropFitBtn').addEventListener('click', () => {
+  if (!state.originalImage) return;
+  const A4_W=2480, A4_H=3508;
+  const sc = Math.min(A4_W/state.originalImage.naturalWidth, A4_H/state.originalImage.naturalHeight)*100;
+  state.cropScale=Math.round(sc); state.cropOffX=0; state.cropOffY=0;
+  syncCropSliders(); updateA4Preview();
+});
+document.getElementById('cropFillBtn').addEventListener('click', () => {
+  if (!state.originalImage) return;
+  const A4_W=2480, A4_H=3508;
+  const sc = Math.max(A4_W/state.originalImage.naturalWidth, A4_H/state.originalImage.naturalHeight)*100;
+  state.cropScale=Math.round(sc); state.cropOffX=0; state.cropOffY=0;
+  syncCropSliders(); updateA4Preview();
+});
+document.getElementById('cropResetBtn').addEventListener('click', () => {
+  state.cropScale=100; state.cropOffX=0; state.cropOffY=0;
+  syncCropSliders(); updateA4Preview();
+});
+function syncCropSliders() {
+  document.getElementById('cropScaleSlider').value = Math.min(300, Math.max(10, state.cropScale));
+  document.getElementById('cropScaleVal').textContent = Math.round(state.cropScale)+'%';
+  document.getElementById('cropOffXSlider').value = Math.max(-500, Math.min(500, state.cropOffX));
+  document.getElementById('cropOffXVal').textContent = Math.round(state.cropOffX);
+  document.getElementById('cropOffYSlider').value = Math.max(-500, Math.min(500, state.cropOffY));
+  document.getElementById('cropOffYVal').textContent = Math.round(state.cropOffY);
+}
+
+/* Apply crop → re-render gray */
+document.getElementById('cropApplyBtn').addEventListener('click', () => {
+  document.getElementById('cropModal').classList.remove('open');
+  drawGray();
+  // reset halftone result since source changed
+  halftoneCanvas.style.display = 'none';
+  document.getElementById('emptyResult').style.display = '';
+  exportBtn.disabled = true;
+  downloadLink.style.display = 'none';
+});
+
+/* ════════════════════════════════════════════
+   PREVIEW MODAL — shows a quick downscaled halftone preview
+════════════════════════════════════════════ */
+document.getElementById('previewRawBtn').addEventListener('click', openPreviewModal);
+document.getElementById('previewClose').addEventListener('click', () => document.getElementById('previewModal').classList.remove('open'));
+document.getElementById('previewCloseBtn').addEventListener('click', () => document.getElementById('previewModal').classList.remove('open'));
+document.getElementById('previewModal').addEventListener('click', e => { if (e.target===document.getElementById('previewModal')) document.getElementById('previewModal').classList.remove('open'); });
+document.getElementById('previewConvertBtn').addEventListener('click', () => {
+  document.getElementById('previewModal').classList.remove('open');
+  convertBtn.click();
+});
+
+function openPreviewModal() {
+  if (!state.originalImage) return;
+  const modal = document.getElementById('previewModal');
+  modal.classList.add('open');
+
+  // Generate a quick low-res halftone (300px wide A4) for preview
+  const PW = 300, PH = Math.round(PW * 297/210);
+  const tc = document.createElement('canvas'); tc.width=PW; tc.height=PH;
+  const tx = tc.getContext('2d');
+
+  // Draw current grayCanvas (already adjusted) scaled to preview size
+  tx.drawImage(grayCanvas, 0, 0, PW, PH);
+  const px = tx.getImageData(0, 0, PW, PH);
+
+  const pc = document.getElementById('previewFinalCanvas');
+  pc.width=PW; pc.height=PH;
+  const pctx = pc.getContext('2d');
+  pctx.clearRect(0,0,PW,PH); pctx.fillStyle='black';
+
+  // Quick halftone at low dpi
+  const previewDpi = PW / 8.2677;
+  renderHalftoneDotsFn(pctx, px, PW, PH, previewDpi);
 }
 
 /* ════════════════════════════════════════════
    HALFTONE RENDERING
 ════════════════════════════════════════════ */
-function renderHalftone(){
+function renderHalftone() {
   setStatus('processing'); setStatusText(i18n[currentLang].statusGenerating);
-  animateProgress('fillExport',0,80,800);
-  setTimeout(()=>{
-    const dpi=state.resolution;
-    const outW=Math.round(8.2677*dpi), outH=Math.round(11.6929*dpi);
-    const src=grayCanvas, sW=src.width, sH=src.height;
-    let iX=0,iY=0,iW=outW,iH=outH;
-    if(state.fitMode==='fit'){const sc=Math.min(outW/sW,outH/sH);iW=Math.round(sW*sc);iH=Math.round(sH*sc);iX=Math.round((outW-iW)/2);iY=Math.round((outH-iH)/2);}
-    else if(state.fitMode==='fill'){const sc=Math.max(outW/sW,outH/sH);iW=Math.round(sW*sc);iH=Math.round(sH*sc);iX=Math.round((outW-iW)/2);iY=Math.round((outH-iH)/2);}
-    const tc=document.createElement('canvas'); tc.width=outW; tc.height=outH;
-    const tx=tc.getContext('2d'); tx.drawImage(src,iX,iY,iW,iH);
-    const px=tx.getImageData(0,0,outW,outH);
+  animateProgress('fillExport', 0, 80, 800);
+  setTimeout(() => {
+    const dpi = state.resolution;
+    const outW = Math.round(8.2677*dpi), outH = Math.round(11.6929*dpi);
+
+    // Use the crop output canvas (A4 positioned image) as source
+    const tc = document.createElement('canvas'); tc.width=outW; tc.height=outH;
+    const tx = tc.getContext('2d');
+
+    // If cropOutputCanvas has content (from drawGray), use it scaled to output dpi
+    if (cropOutCanvas.width > 0) {
+      tx.drawImage(cropOutCanvas, 0, 0, outW, outH);
+    } else {
+      tx.drawImage(grayCanvas, 0, 0, outW, outH);
+    }
+
+    // Apply grayscale adjustments
+    const raw = tx.getImageData(0,0,outW,outH);
+    const adj = tx.createImageData(outW,outH);
+    const {brightness:br,contrast:co,exposure:ex,gamma:ga} = state;
+    for (let i=0;i<raw.data.length;i+=4) {
+      let v = 0.299*raw.data[i]+0.587*raw.data[i+1]+0.114*raw.data[i+2];
+      v += br*2.55;
+      const cf=(259*(co+255))/(255*(259-co));
+      v=cf*(v-128)+128;
+      v*=Math.pow(2,ex/50);
+      v=255*Math.pow(v/255,1/ga);
+      v=Math.max(0,Math.min(255,v));
+      adj.data[i]=adj.data[i+1]=adj.data[i+2]=v; adj.data[i+3]=raw.data[i+3];
+    }
+
     halftoneCanvas.width=outW; halftoneCanvas.height=outH;
     htCtx.clearRect(0,0,outW,outH); htCtx.fillStyle='black';
-    if(state.method==='threshold') renderThreshold(px,outW,outH);
-    else if(state.method==='diffusion') renderDiffusion(px,outW,outH);
-    else if(state.method==='pattern') renderPattern(px,outW,outH);
-    else renderHalftoneDots(px,outW,outH,dpi);
+
+    if (state.method==='threshold') renderThresholdFn(htCtx,adj,outW,outH);
+    else if (state.method==='diffusion') renderDiffusionFn(htCtx,adj,outW,outH);
+    else if (state.method==='pattern') renderPatternFn(htCtx,adj,outW,outH);
+    else renderHalftoneDotsFn(htCtx,adj,outW,outH,dpi);
+
     document.getElementById('emptyResult').style.display='none';
     halftoneCanvas.style.display=''; applyZoom(halftoneCanvas);
     animateProgress('fillExport',80,100,300);
     setTimeout(()=>{ exportBtn.disabled=false; setStatus('ok'); setStatusText(i18n[currentLang].statusGenerated(outW,outH)); },300);
-  },80);
+  }, 80);
 }
 
-function renderHalftoneDots(px,W,H,dpi){
+function renderHalftoneDotsFn(ctx,pixels,W,H,dpi) {
   const lpi=state.lpi, ar=(state.angle*Math.PI)/180, cz=dpi/lpi;
   const c0=Math.cos(-ar),s0=Math.sin(-ar),cr=Math.cos(ar),sr=Math.sin(ar);
   const corners=[[0,0],[W,0],[0,H],[W,H]];
   let mnx=Infinity,mxx=-Infinity,mny=Infinity,mxy=-Infinity;
   corners.forEach(([x,y])=>{
     const gx=(x*c0-y*s0)/cz,gy=(x*s0+y*c0)/cz;
-    mnx=Math.min(mnx,Math.floor(gx));mxx=Math.max(mxx,Math.ceil(gx));
-    mny=Math.min(mny,Math.floor(gy));mxy=Math.max(mxy,Math.ceil(gy));
+    mnx=Math.min(mnx,Math.floor(gx)); mxx=Math.max(mxx,Math.ceil(gx));
+    mny=Math.min(mny,Math.floor(gy)); mxy=Math.max(mxy,Math.ceil(gy));
   });
   for(let gi=mnx;gi<=mxx;gi++) for(let gj=mny;gj<=mxy;gj++){
     const cx=(gi+0.5)*cz*cr-(gj+0.5)*cz*sr, cy=(gi+0.5)*cz*sr+(gj+0.5)*cz*cr;
-    const lum=sampleCell(px,W,H,cx,cy,cz,ar);
+    const lum=sampleCell(pixels,W,H,cx,cy,cz,ar);
     const cov=1-lum/255; if(cov<0.01) continue;
     const mr=cz*0.5, r=mr*Math.sqrt(cov);
-    htCtx.save(); htCtx.translate(cx,cy); htCtx.rotate(ar);
-    drawShape(htCtx,r,state.shape,mr); htCtx.restore();
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(ar);
+    drawShape(ctx,r,state.shape,mr); ctx.restore();
   }
 }
 function sampleCell(px,W,H,cx,cy,cz,ar){
@@ -1254,15 +1381,15 @@ function drawShape(ctx,r,shape,mr){
   }
   ctx.fill();
 }
-function renderThreshold(px,W,H){
-  const d=htCtx.createImageData(W,H);
-  for(let i=0;i<px.data.length;i+=4){d.data[i]=d.data[i+1]=d.data[i+2]=0;d.data[i+3]=px.data[i]<128?255:0;}
-  htCtx.putImageData(d,0,0);
+function renderThresholdFn(ctx,pixels,W,H){
+  const d=ctx.createImageData(W,H);
+  for(let i=0;i<pixels.data.length;i+=4){d.data[i]=d.data[i+1]=d.data[i+2]=0;d.data[i+3]=pixels.data[i]<128?255:0;}
+  ctx.putImageData(d,0,0);
 }
-function renderDiffusion(px,W,H){
-  const buf=new Float32Array(px.data.length/4);
-  for(let i=0;i<buf.length;i++) buf[i]=px.data[i*4];
-  const d=htCtx.createImageData(W,H);
+function renderDiffusionFn(ctx,pixels,W,H){
+  const buf=new Float32Array(pixels.data.length/4);
+  for(let i=0;i<buf.length;i++) buf[i]=pixels.data[i*4];
+  const d=ctx.createImageData(W,H);
   for(let y=0;y<H;y++) for(let x=0;x<W;x++){
     const idx=y*W+x,old=buf[idx],nv=old<128?0:255,err=old-nv;
     buf[idx]=nv;
@@ -1270,32 +1397,35 @@ function renderDiffusion(px,W,H){
     if(y+1<H){if(x>0)buf[idx+W-1]+=err*3/16;buf[idx+W]+=err*5/16;if(x+1<W)buf[idx+W+1]+=err/16;}
   }
   for(let i=0;i<buf.length;i++){d.data[i*4]=d.data[i*4+1]=d.data[i*4+2]=0;d.data[i*4+3]=buf[i]<128?255:0;}
-  htCtx.putImageData(d,0,0);
+  ctx.putImageData(d,0,0);
 }
-function renderPattern(px,W,H){
+function renderPatternFn(ctx,pixels,W,H){
   const pat=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
-  const d=htCtx.createImageData(W,H);
+  const d=ctx.createImageData(W,H);
   for(let y=0;y<H;y++) for(let x=0;x<W;x++){
-    const i=(y*W+x)*4;d.data[i]=d.data[i+1]=d.data[i+2]=0;d.data[i+3]=px.data[i]<pat[y%4][x%4]*16?255:0;
+    const i=(y*W+x)*4;d.data[i]=d.data[i+1]=d.data[i+2]=0;d.data[i+3]=pixels.data[i]<pat[y%4][x%4]*16?255:0;
   }
-  htCtx.putImageData(d,0,0);
+  ctx.putImageData(d,0,0);
 }
 
 /* ════════════════════════════════════════════
    ACTION BUTTONS
 ════════════════════════════════════════════ */
-convertBtn.addEventListener('click',()=>{ if(!state.originalImage) return; exportBtn.disabled=true; downloadLink.style.display='none'; renderHalftone(); });
-exportBtn.addEventListener('click',()=>{
+convertBtn.addEventListener('click', () => {
+  if (!state.originalImage) return;
+  exportBtn.disabled=true; downloadLink.style.display='none'; renderHalftone();
+});
+exportBtn.addEventListener('click', () => {
   setStatus('processing'); setStatusText(i18n[currentLang].statusExporting);
   animateProgress('fillExport',0,100,600);
-  setTimeout(()=>{
-    try{
-      const url=halftoneCanvas.toDataURL('image/png');
-      const a=document.createElement('a'); a.href=url; a.download='fotolito_A4_300dpi.png'; a.click();
+  setTimeout(() => {
+    try {
+      const url = halftoneCanvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href=url; a.download='fotolito_A4_300dpi.png'; a.click();
       downloadLink.href=url; downloadLink.download='fotolito_A4_300dpi.png'; downloadLink.style.display='';
       setStatus('ok'); setStatusText(i18n[currentLang].statusExported);
-    }catch(e){ showError(i18n[currentLang].errExport(e.message)); setStatus('ok'); }
-  },300);
+    } catch(e) { showError(i18n[currentLang].errExport(e.message)); setStatus('fail'); }
+  }, 300);
 });
 
 /* ════════════════════════════════════════════
